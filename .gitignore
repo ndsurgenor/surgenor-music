@@ -1,4 +1,7 @@
 /.env
+/.env.example.dev
+/.env.example.production
+/.env.example.staging
 /.idea
 /vendor
 .DS_Store
