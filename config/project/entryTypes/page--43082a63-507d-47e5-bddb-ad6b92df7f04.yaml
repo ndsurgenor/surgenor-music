@@ -1,0 +1,67 @@
+color: null
+fieldLayouts:
+  ce009f6f-00b0-4a74-a73a-237b8c2f2170:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-01-11T12:18:59+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 5f41cd29-7b77-448c-b01a-334d33813be3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-11T12:24:00+00:00'
+            elementCondition: null
+            fieldUid: ea431318-14bb-4674-92e6-c01f01fb430a # Hero Image
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 703d9070-8875-4e31-8bf0-f9400df1c526
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 858ff78d-9760-4e45-a111-982c424edf2e
+        userCondition: null
+handle: page
+hasTitleField: true
+icon: file
+name: Page
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

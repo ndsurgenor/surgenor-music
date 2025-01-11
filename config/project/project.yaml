@@ -1,18 +1,32 @@
-dateModified: 1736592111
+dateModified: 1736599171
 email:
   fromEmail: surgenormusic@gmail.com
   fromName: surgenormusic
-  transportType: craft\mail\transportadapters\Sendmail
+  replyToEmail: null
+  template: null
+  transportSettings:
+    password: $ADMIN_EMAIL_PASSWORD
+    username: $ADMIN_EMAIL_USERNAME
+  transportType: craft\mail\transportadapters\Gmail
 meta:
   __names__:
+    17da2f25-3992-4c01-af0e-d25a652a176e: 'Global Settings' # Global Settings
     59bfcfec-3d66-4fc8-8d15-2fcb55cd17a9: surgenormusic # surgenormusic
+    43082a63-507d-47e5-bddb-ad6b92df7f04: Page # Page
     a2f4260f-06c5-4050-bd84-86e3ec829e37: surgenormusic # surgenormusic
+    ea431318-14bb-4674-92e6-c01f01fb430a: 'Hero Image' # Hero Image
+plugins:
+  freeform:
+    edition: express
+    enabled: true
+    schemaVersion: 5.4.1
 system:
   edition: solo
   live: true
   name: surgenormusic
+  retryDuration: null
   schemaVersion: 5.5.0.0
-  timeZone: America/Los_Angeles
+  timeZone: Europe/Dublin
 users:
   allowPublicRegistration: false
   defaultGroup: null
