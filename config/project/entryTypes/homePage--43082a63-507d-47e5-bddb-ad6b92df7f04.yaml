@@ -54,10 +54,10 @@ fieldLayouts:
         name: Content
         uid: 858ff78d-9760-4e45-a111-982c424edf2e
         userCondition: null
-handle: page
+handle: homePage
 hasTitleField: true
-icon: file
-name: Page
+icon: house
+name: 'Home Page'
 showSlugField: true
 showStatusField: true
 slugTranslationKeyFormat: null

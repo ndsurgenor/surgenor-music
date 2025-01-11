@@ -1,19 +1,38 @@
-dateModified: 1736599171
+dateModified: 1736613030
+elementSources:
+  craft\elements\Entry:
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: '*'
+      tableAttributes:
+        - status
+        - section
+        - postDate
+        - expiryDate
+        - link
+        - parent
+        - slug
+      type: native
 email:
-  fromEmail: surgenormusic@gmail.com
-  fromName: surgenormusic
-  replyToEmail: null
+  fromEmail: $SYSTEM_EMAIL
+  fromName: $SYSTEM_EMAIL_SENDER
+  replyToEmail: $SYSTEM_EMAIL
   template: null
   transportSettings:
-    password: $ADMIN_EMAIL_PASSWORD
-    username: $ADMIN_EMAIL_USERNAME
+    password: $SYSTEM_EMAIL_PASSWORD
+    username: $SYSTEM_EMAIL
   transportType: craft\mail\transportadapters\Gmail
 meta:
   __names__:
     17da2f25-3992-4c01-af0e-d25a652a176e: 'Global Settings' # Global Settings
     59bfcfec-3d66-4fc8-8d15-2fcb55cd17a9: surgenormusic # surgenormusic
-    43082a63-507d-47e5-bddb-ad6b92df7f04: Page # Page
+    43082a63-507d-47e5-bddb-ad6b92df7f04: 'Home Page' # Home Page
     a2f4260f-06c5-4050-bd84-86e3ec829e37: surgenormusic # surgenormusic
+    a33ef57e-b155-4ef0-ac5f-811e3ca07733: Pages # Pages
     ea431318-14bb-4674-92e6-c01f01fb430a: 'Hero Image' # Hero Image
 plugins:
   freeform:

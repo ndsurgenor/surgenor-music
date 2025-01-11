@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 1
+template: /
+uriParts:
+  - home
+uriPattern: home
