@@ -54,7 +54,7 @@ fieldLayouts:
         name: Content
         uid: 858ff78d-9760-4e45-a111-982c424edf2e
         userCondition: null
-handle: homePage
+handle: home
 hasTitleField: true
 icon: house
 name: 'Home Page'
