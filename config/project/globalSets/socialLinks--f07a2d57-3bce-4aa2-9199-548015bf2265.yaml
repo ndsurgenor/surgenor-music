@@ -1,0 +1,124 @@
+fieldLayouts:
+  582b83ff-a2f8-467e-846e-265869c48c62:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-01-12T12:41:19+00:00'
+            elementCondition: null
+            fieldUid: 587126d5-7229-4091-8a82-420ff5c1816d # Bluesky URL
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9d674292-4b9e-4446-a617-d1065befae2d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-12T12:41:19+00:00'
+            elementCondition: null
+            fieldUid: dd2ae59b-62f3-4e8f-9a56-3e8c61a16345 # Facebook URL
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f94e9f4d-3d4f-4552-8eed-902739edb5ef
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-12T12:41:19+00:00'
+            elementCondition: null
+            fieldUid: ba29bb9e-1300-4371-aece-556cd5203a0f # Instagram URL
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: edfdd5e4-79ea-4137-b892-6340406c978a
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-12T13:01:12+00:00'
+            elementCondition: null
+            fieldUid: a65eda83-acb6-47fd-be90-63261dae1da8 # Spotify URL
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 670f709b-7c02-416e-a561-e73d0f8332af
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-12T12:41:19+00:00'
+            elementCondition: null
+            fieldUid: 4cbff5fa-0e88-4af9-9ecc-d76d7bc63ba0 # TikTok URL
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0d3733ca-e6ad-4df8-95d6-8c0a62078317
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-12T12:41:19+00:00'
+            elementCondition: null
+            fieldUid: c985f491-8304-45bb-8bd7-6f7a636e07e7 # X (Twitter) URL
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0afb0416-6ed4-498d-a2ff-098891f92210
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-12T13:01:12+00:00'
+            elementCondition: null
+            fieldUid: 33b16d2e-8912-4e4a-91bd-dd62d3e1157c # YouTube URL
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f0dc8969-cbcb-49fb-9d74-d4f20a89197d
+            userCondition: null
+            warning: null
+            width: 100
+        name: URLs
+        uid: b80536e1-b60b-4c15-8e2b-06112be0d80d
+        userCondition: null
+handle: socialLinks
+name: 'Social Links'
+sortOrder: 2

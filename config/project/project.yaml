@@ -1,4 +1,4 @@
-dateModified: 1736681431
+dateModified: 1736686872
 elementSources:
   craft\elements\Entry:
     -
@@ -17,6 +17,22 @@ elementSources:
         - parent
         - slug
       type: native
+    -
+      heading: Sitemap
+      type: heading
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:a33ef57e-b155-4ef0-ac5f-811e3ca07733' # Pages
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
 email:
   fromEmail: $SYSTEM_EMAIL
   fromName: $SYSTEM_EMAIL_SENDER
@@ -28,12 +44,19 @@ email:
   transportType: craft\mail\transportadapters\Gmail
 meta:
   __names__:
-    17da2f25-3992-4c01-af0e-d25a652a176e: 'Global Settings' # Global Settings
+    4cbff5fa-0e88-4af9-9ecc-d76d7bc63ba0: 'TikTok URL' # TikTok URL
+    33b16d2e-8912-4e4a-91bd-dd62d3e1157c: 'YouTube URL' # YouTube URL
     59bfcfec-3d66-4fc8-8d15-2fcb55cd17a9: surgenormusic # surgenormusic
     43082a63-507d-47e5-bddb-ad6b92df7f04: 'Home Page' # Home Page
+    587126d5-7229-4091-8a82-420ff5c1816d: 'Bluesky URL' # Bluesky URL
     a2f4260f-06c5-4050-bd84-86e3ec829e37: surgenormusic # surgenormusic
     a33ef57e-b155-4ef0-ac5f-811e3ca07733: Pages # Pages
+    a65eda83-acb6-47fd-be90-63261dae1da8: 'Spotify URL' # Spotify URL
+    ba29bb9e-1300-4371-aece-556cd5203a0f: 'Instagram URL' # Instagram URL
+    c985f491-8304-45bb-8bd7-6f7a636e07e7: 'X (Twitter) URL' # X (Twitter) URL
+    dd2ae59b-62f3-4e8f-9a56-3e8c61a16345: 'Facebook URL' # Facebook URL
     ea431318-14bb-4674-92e6-c01f01fb430a: 'Hero Image' # Hero Image
+    f07a2d57-3bce-4aa2-9199-548015bf2265: 'Social Links' # Social Links
 plugins:
   freeform:
     edition: express

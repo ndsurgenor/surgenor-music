@@ -23,5 +23,5 @@ siteSettings:
     enabledByDefault: true
     hasUrls: true
     template: pages/_entry.twig
-    uriFormat: '{slug}'
+    uriFormat: __home__
 type: channel
