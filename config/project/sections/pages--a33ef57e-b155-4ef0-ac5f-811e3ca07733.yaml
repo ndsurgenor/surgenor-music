@@ -2,6 +2,8 @@ defaultPlacement: end
 enableVersioning: true
 entryTypes:
   - 43082a63-507d-47e5-bddb-ad6b92df7f04 # Home Page
+  - 4555cef9-aec3-42bc-993e-f407872cae34 # Member Page
+  - 2a5fae6a-daed-46a9-955d-d715e8d18e3f # Public Page
 handle: pages
 maxAuthors: 1
 name: Pages
@@ -23,5 +25,8 @@ siteSettings:
     enabledByDefault: true
     hasUrls: true
     template: pages/_entry.twig
-    uriFormat: __home__
-type: channel
+    uriFormat: '{slug}'
+structure:
+  maxLevels: null
+  uid: 18af8ac6-ae11-4382-99c2-6c1bea72eb6a
+type: structure

@@ -1,4 +1,4 @@
-dateModified: 1736686872
+dateModified: 1736687492
 elementSources:
   craft\elements\Entry:
     -
@@ -44,9 +44,11 @@ email:
   transportType: craft\mail\transportadapters\Gmail
 meta:
   __names__:
+    2a5fae6a-daed-46a9-955d-d715e8d18e3f: 'Public Page' # Public Page
     4cbff5fa-0e88-4af9-9ecc-d76d7bc63ba0: 'TikTok URL' # TikTok URL
     33b16d2e-8912-4e4a-91bd-dd62d3e1157c: 'YouTube URL' # YouTube URL
     59bfcfec-3d66-4fc8-8d15-2fcb55cd17a9: surgenormusic # surgenormusic
+    4555cef9-aec3-42bc-993e-f407872cae34: 'Member Page' # Member Page
     43082a63-507d-47e5-bddb-ad6b92df7f04: 'Home Page' # Home Page
     587126d5-7229-4091-8a82-420ff5c1816d: 'Bluesky URL' # Bluesky URL
     a2f4260f-06c5-4050-bd84-86e3ec829e37: surgenormusic # surgenormusic
