@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  {# HEAD #}
-  <head>
-    {% include "_includes/head" %}
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="surgenor, nathan, surgenormusic, worship, worship music">
+  <meta name="description" content="Home of composer Nathan Surgenor and associate projects">
+  <title>Surgenor Music</title>
+</head>
 
-  {# BODY #}
-  <body>
-    {% block main %}
-    {% endblock %}
-  </body>
+<body>
+
+  {# Navbar #}
+  {% include "_includes/navbar" %}
+
+  {# Main Content #}
+  {% block main %}
+  {% endblock %}
+
+  {# Footer #}
+  {% include "_includes/footer" %}
+
+</body>
   
 </html>
