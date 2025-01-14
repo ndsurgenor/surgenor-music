@@ -1,12 +1,11 @@
 {% extends "_layouts/base" %}
 
 {% set title = entry.title %}
-{% set hero = entry.heroImage | length ? entry.heroImage : null %}
-
+{% set hero = entry.heroImage|length ? entry.heroImage : null %}
 {% block main %}
 	<div>
-        <img src={{hero}}>    
-    </div>
+		<img src={{hero}}>
+	</div>
 	<div>
 		<h1>{{title}}</h1>
 		<p>Content goes here</p>
