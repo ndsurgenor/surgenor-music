@@ -4,7 +4,7 @@
 {% set hero = entry.heroImage|length ? entry.heroImage : null %}
 {% block main %}
 
-	{# HERO #}
+	{# HERO CAROUSEL #}
 	<div id="carouselExampleFade" class="carousel slide carousel-fade">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
@@ -27,8 +27,15 @@
 		</button>
 	</div>
 
+	{# CARDS #}
 	<div>
 		<h1>{{title}}</h1>
 		<p>Content goes here</p>
 	</div>
+
+	{# NEWS CAROUSEL#}
+	<div>
+		<p>Content goes here</p>
+	</div>
+
 {% endblock %}
