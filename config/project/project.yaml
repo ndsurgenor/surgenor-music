@@ -1,4 +1,4 @@
-dateModified: 1736687492
+dateModified: 1737071365
 elementSources:
   craft\elements\Entry:
     -
@@ -51,7 +51,7 @@ meta:
     4555cef9-aec3-42bc-993e-f407872cae34: 'Member Page' # Member Page
     43082a63-507d-47e5-bddb-ad6b92df7f04: 'Home Page' # Home Page
     587126d5-7229-4091-8a82-420ff5c1816d: 'Bluesky URL' # Bluesky URL
-    a2f4260f-06c5-4050-bd84-86e3ec829e37: surgenormusic # surgenormusic
+    a2f4260f-06c5-4050-bd84-86e3ec829e37: 'Surgenor Music' # Surgenor Music
     a33ef57e-b155-4ef0-ac5f-811e3ca07733: Pages # Pages
     a65eda83-acb6-47fd-be90-63261dae1da8: 'Spotify URL' # Spotify URL
     ba29bb9e-1300-4371-aece-556cd5203a0f: 'Instagram URL' # Instagram URL

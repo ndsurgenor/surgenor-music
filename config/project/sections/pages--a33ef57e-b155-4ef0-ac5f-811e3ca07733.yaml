@@ -21,7 +21,7 @@ previewTargets:
         - '1'
 propagationMethod: all
 siteSettings:
-  a2f4260f-06c5-4050-bd84-86e3ec829e37: # surgenormusic
+  a2f4260f-06c5-4050-bd84-86e3ec829e37: # Surgenor Music
     enabledByDefault: true
     hasUrls: true
     template: pages/_entry.twig
