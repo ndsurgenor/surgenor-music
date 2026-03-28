@@ -18,7 +18,7 @@ class SongController extends BaseController
         $keys  = Song::allKeys();
         $tags  = Song::allTags();
 
-        $this->render('songs/index.html.twig', [
+        $this->render('songs/index.twig', [
             'songs'     => $songs,
             'keys'      => $keys,
             'tags'      => $tags,
@@ -34,10 +34,10 @@ class SongController extends BaseController
 
         if (!$song) {
             http_response_code(404);
-            $this->render('404.html.twig');
+            $this->render('404.twig');
             return;
         }
 
-        $this->render('songs/show.html.twig', ['song' => $song]);
+        $this->render('songs/show.twig', ['song' => $song]);
     }
 }

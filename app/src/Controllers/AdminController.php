@@ -17,7 +17,7 @@ class AdminController extends BaseController
         if ($this->isAuthenticated()) {
             $this->redirect('/admin');
         }
-        $this->render('admin/login.html.twig', ['error' => null]);
+        $this->render('admin/login.twig', ['error' => null]);
     }
 
     public function authenticate(array $params = []): void
@@ -30,7 +30,7 @@ class AdminController extends BaseController
             $this->redirect('/admin');
         }
 
-        $this->render('admin/login.html.twig', ['error' => 'Invalid password.']);
+        $this->render('admin/login.twig', ['error' => 'Invalid password.']);
     }
 
     public function logout(array $params = []): void
@@ -47,7 +47,7 @@ class AdminController extends BaseController
     public function dashboard(array $params = []): void
     {
         $this->requireAuth();
-        $this->render('admin/dashboard.html.twig', ['stats' => Song::stats()]);
+        $this->render('admin/dashboard.twig', ['stats' => Song::stats()]);
     }
 
     // -------------------------------------------------------------------------
@@ -57,13 +57,13 @@ class AdminController extends BaseController
     public function songs(array $params = []): void
     {
         $this->requireAuth();
-        $this->render('admin/songs/index.html.twig', ['songs' => Song::all()]);
+        $this->render('admin/songs/index.twig', ['songs' => Song::all()]);
     }
 
     public function createSong(array $params = []): void
     {
         $this->requireAuth();
-        $this->render('admin/songs/form.html.twig', [
+        $this->render('admin/songs/form.twig', [
             'song'  => null,
             'tags'  => Song::allTags(),
             'error' => null,
@@ -78,7 +78,7 @@ class AdminController extends BaseController
         $data = $this->songDataFromPost();
 
         if (!$data['title']) {
-            $this->render('admin/songs/form.html.twig', [
+            $this->render('admin/songs/form.twig', [
                 'song'  => $data,
                 'tags'  => Song::allTags(),
                 'error' => 'Title is required.',
@@ -103,7 +103,7 @@ class AdminController extends BaseController
             $this->redirect('/admin/songs');
         }
 
-        $this->render('admin/songs/form.html.twig', [
+        $this->render('admin/songs/form.twig', [
             'song'  => $song,
             'tags'  => Song::allTags(),
             'error' => null,

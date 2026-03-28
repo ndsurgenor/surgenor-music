@@ -11,7 +11,7 @@ class ContactController extends BaseController
 {
     public function index(array $params = []): void
     {
-        $this->render('contact.html.twig', ['sent' => false, 'error' => null, 'old' => []]);
+        $this->render('contact.twig', ['sent' => false, 'error' => null, 'old' => []]);
     }
 
     public function submit(array $params = []): void
@@ -23,7 +23,7 @@ class ContactController extends BaseController
         $message = trim($_POST['message'] ?? '');
 
         if (!$name || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$message) {
-            $this->render('contact.html.twig', [
+            $this->render('contact.twig', [
                 'sent'  => false,
                 'error' => 'Please fill in all fields with a valid email address.',
                 'old'   => compact('name', 'email', 'message'),
@@ -50,9 +50,9 @@ class ContactController extends BaseController
 
             $mail->send();
 
-            $this->render('contact.html.twig', ['sent' => true, 'error' => null, 'old' => []]);
+            $this->render('contact.twig', ['sent' => true, 'error' => null, 'old' => []]);
         } catch (Exception) {
-            $this->render('contact.html.twig', [
+            $this->render('contact.twig', [
                 'sent'  => false,
                 'error' => 'Sorry, there was a problem sending your message. Please try again later.',
                 'old'   => compact('name', 'email', 'message'),
