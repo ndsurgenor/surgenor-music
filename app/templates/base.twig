@@ -13,7 +13,7 @@
 </head>
 <body class="font-sans text-gray-900 bg-white flex flex-col min-h-full">
 
-    {# ── Navigation ────────────────────────────────────────────────── #}
+    {# NAVIGATION #}
     <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
         <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
 
@@ -28,14 +28,14 @@
                 <span class="text-primary font-semibold text-xl tracking-tight">usic</span>
             </a>
 
-            {# Desktop nav #}
+            {# Desktop #}
             <ul class="hidden md:flex items-center gap-8">
                 <li><a href="/" class="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Home</a></li>
                 <li><a href="/songs" class="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Music</a></li>
                 <li><a href="/contact" class="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Contact</a></li>
             </ul>
 
-            {# Mobile menu toggle #}
+            {# Mobile #}
             <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -53,19 +53,19 @@
         </div>
     </header>
 
-    {# ── Flash message ─────────────────────────────────────────────── #}
+    {# FLASH MESSAGE #}
     {% if flash %}
     <div id="flash-message" class="{% if flash.type == 'success' %}bg-primary/10 border-primary/20 text-primary-700{% else %}bg-red-50 border-red-200 text-red-700{% endif %} border-b px-6 py-3 text-sm text-center font-medium">
         {{ flash.message }}
     </div>
     {% endif %}
 
-    {# ── Main content ──────────────────────────────────────────────── #}
+    {# MAIN CONTENT #}
     <main class="flex-1">
         {% block content %}{% endblock %}
     </main>
 
-    {# ── Footer ────────────────────────────────────────────────────── #}
+    {# FOOTER #}
     <footer class="bg-white border-t border-gray-200 mt-16">
         <div class="max-w-6xl mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">

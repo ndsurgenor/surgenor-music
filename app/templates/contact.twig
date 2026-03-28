@@ -1,7 +1,7 @@
 {% extends 'base.twig' %}
 
-{% block title %}Contact — Surgenor Music{% endblock %}
-{% block meta_description %}Get in touch with Nathan Surgenor about worship music and resources.{% endblock %}
+{% block title %}Contact | Surgenor Music{% endblock %}
+{% block meta_description %}Get in touch with Surgenor Music about worship music and resources.{% endblock %}
 
 {% block content %}
 <div class="max-w-2xl mx-auto px-6 py-12">
@@ -27,6 +27,7 @@
     </div>
     {% endif %}
 
+    {# FORM #}
     <form method="POST" action="/contact" class="space-y-6 card">
         <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 

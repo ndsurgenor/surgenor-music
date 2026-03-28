@@ -1,6 +1,6 @@
 {% extends 'base.twig' %}
 
-{% block title %}Song Catalogue — Surgenor Music{% endblock %}
+{% block title %}Song Catalogue | Surgenor Music{% endblock %}
 {% block meta_description %}Browse and search worship songs and resources from Nathan Surgenor.{% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@
     <h1 class="text-3xl font-bold text-gray-900 mb-2">Song Catalogue</h1>
     <p class="text-gray-500 mb-8">Browse and search all available songs and resources.</p>
 
-    {# ── Search & filters ──────────────────────────────────────────── #}
+    {# SEARCH & FILTERS #}
     <form method="GET" action="/songs" class="mb-8">
         <div class="flex flex-col sm:flex-row gap-3">
 
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            {# Key filter #}
+            {# Filter by Key #}
             {% if keys %}
             <div class="sm:w-40">
                 <label for="key" class="sr-only">Filter by key</label>
@@ -41,7 +41,7 @@
             </div>
             {% endif %}
 
-            {# Tag filter #}
+            {# Filter by Tag #}
             {% if tags %}
             <div class="sm:w-44">
                 <label for="tag" class="sr-only">Filter by tag</label>
@@ -62,7 +62,7 @@
         </div>
     </form>
 
-    {# ── Results ───────────────────────────────────────────────────── #}
+    {# RESULTS #}
     {% if songs %}
     <div class="text-sm text-gray-500 mb-4">
         {{ songs|length }} song{% if songs|length != 1 %}s{% endif %}
@@ -107,6 +107,7 @@
     </div>
 
     {% else %}
+    {# No songs found #}
     <div class="text-center py-16 text-gray-500">
         <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>

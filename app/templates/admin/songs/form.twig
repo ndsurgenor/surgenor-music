@@ -22,7 +22,7 @@
 
     <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 
-    {# ── Basic details ─────────────────────────────────────────────── #}
+    {# BASIC DETAILS #}
     <div class="card space-y-5">
         <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Song Details</h2>
 
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    {# ── Lyrics ────────────────────────────────────────────────────── #}
+    {# LYRICS #}
     <div class="card space-y-4">
         <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Lyrics</h2>
         <div>
@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    {# ── Copyright ─────────────────────────────────────────────────── #}
+    {# COPYRIGHT #}
     <div class="card space-y-4">
         <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Copyright &amp; Licensing</h2>
         <div>
@@ -92,7 +92,7 @@
         </div>
     </div>
 
-    {# ── Sheet Music files ─────────────────────────────────────────── #}
+    {# SHEET MUSIC FILES #}
     <div class="card space-y-4">
         <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Sheet Music (PDF)</h2>
 
@@ -123,7 +123,7 @@
         </div>
     </div>
 
-    {# ── Audio files ───────────────────────────────────────────────── #}
+    {# AUDIO FILES #}
     <div class="card space-y-4">
         <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Audio Files</h2>
 
@@ -154,7 +154,7 @@
         </div>
     </div>
 
-    {# ── Actions ───────────────────────────────────────────────────── #}
+    {# ACTION BUTTONS #}
     <div class="flex items-center gap-3">
         <button type="submit" class="btn-primary">
             {{ is_edit ? 'Save Changes' : 'Create Song' }}
