@@ -3,11 +3,17 @@
     "version": "1.0.0",
     "scripts": {
         "dev": "tailwindcss -i ./resources/css/app.css -o ./public_html/assets/css/app.css --watch",
-        "build": "tailwindcss -i ./resources/css/app.css -o ./public_html/assets/css/app.css --minify"
+        "build": "tailwindcss -i ./resources/css/app.css -o ./public_html/assets/css/app.css --minify",
+        "php": "php -S localhost:8000 -t public_html",
+        "start": "concurrently --names \"php,css\" --prefix-colors \"cyan,yellow\" \"npm run php\" \"npm run dev\"",
+        "view": "concurrently --names \"php,css,browser\" --prefix-colors \"cyan,yellow,green\" \"npm run php\" \"npm run dev\" \"node scripts/open-browser.js\""
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.0",
         "autoprefixer": "^10.4.0",
-        "tailwindcss": "^3.4.0"
+        "concurrently": "^9.2.1",
+        "open-cli": "^7.2.0",
+        "tailwindcss": "^3.4.0",
+        "wait-on": "^9.0.4"
     }
 }
