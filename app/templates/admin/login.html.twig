@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login — Surgenor Music</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body class="font-sans h-full flex items-center justify-center bg-gray-100">
+
+<div class="w-full max-w-sm px-6">
+    <div class="text-center mb-8">
+        <div class="flex items-center justify-center mb-2">
+            <span class="text-primary font-semibold text-xl tracking-tight">surgenor</span>
+            <span class="inline-flex items-center gap-[3px] mx-1.5">
+                <span class="w-[3px] h-[17px] bg-accent rounded-sm"></span>
+                <span class="w-[3px] h-[17px] bg-accent rounded-sm"></span>
+                <span class="w-[3px] h-[17px] bg-accent rounded-sm"></span>
+            </span>
+            <span class="text-primary font-semibold text-xl tracking-tight">usic</span>
+        </div>
+        <p class="text-sm text-gray-500">Admin Panel</p>
+    </div>
+
+    {% if error %}
+    <div class="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-700 mb-4">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <div class="card shadow-sm">
+        <form method="POST" action="/admin/login">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+
+            <div class="mb-5">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password"
+                       required autofocus
+                       class="form-input"
+                       placeholder="Enter admin password">
+            </div>
+
+            <button type="submit" class="btn-primary w-full justify-center">Sign in</button>
+        </form>
+    </div>
+</div>
+
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

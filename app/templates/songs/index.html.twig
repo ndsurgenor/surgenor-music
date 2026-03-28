@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Song Catalogue — Surgenor Music{% endblock %}
+{% block meta_description %}Browse and search worship songs and resources from Nathan Surgenor.{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-6 py-12">
+
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Song Catalogue</h1>
+    <p class="text-gray-500 mb-8">Browse and search all available songs and resources.</p>
+
+    {# ── Search & filters ──────────────────────────────────────────── #}
+    <form method="GET" action="/songs" class="mb-8">
+        <div class="flex flex-col sm:flex-row gap-3">
+
+            {# Search #}
+            <div class="flex-1">
+                <label for="q" class="sr-only">Search songs</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <input type="search" id="q" name="q" value="{{ search }}"
+                           placeholder="Search by title or lyrics…"
+                           class="form-input pl-9">
+                </div>
+            </div>
+
+            {# Key filter #}
+            {% if keys %}
+            <div class="sm:w-40">
+                <label for="key" class="sr-only">Filter by key</label>
+                <select id="key" name="key" class="form-input" data-auto-submit>
+                    <option value="">All keys</option>
+                    {% for k in keys %}
+                    <option value="{{ k }}" {% if filterKey == k %}selected{% endif %}>Key of {{ k }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endif %}
+
+            {# Tag filter #}
+            {% if tags %}
+            <div class="sm:w-44">
+                <label for="tag" class="sr-only">Filter by tag</label>
+                <select id="tag" name="tag" class="form-input" data-auto-submit>
+                    <option value="">All themes</option>
+                    {% for tag in tags %}
+                    <option value="{{ tag.slug }}" {% if filterTag == tag.slug %}selected{% endif %}>{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endif %}
+
+            <button type="submit" class="btn-primary shrink-0">Search</button>
+
+            {% if search or filterKey or filterTag %}
+            <a href="/songs" class="btn-secondary shrink-0">Clear</a>
+            {% endif %}
+        </div>
+    </form>
+
+    {# ── Results ───────────────────────────────────────────────────── #}
+    {% if songs %}
+    <div class="text-sm text-gray-500 mb-4">
+        {{ songs|length }} song{% if songs|length != 1 %}s{% endif %}
+        {% if search %} matching "<strong class="text-gray-700">{{ search }}</strong>"{% endif %}
+    </div>
+
+    <div class="border border-gray-200 rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+            <thead class="bg-gray-50 border-b border-gray-200">
+                <tr>
+                    <th class="text-left px-5 py-3 font-semibold text-gray-700">Title</th>
+                    <th class="text-left px-5 py-3 font-semibold text-gray-700 hidden sm:table-cell">Key</th>
+                    <th class="text-left px-5 py-3 font-semibold text-gray-700 hidden md:table-cell">Themes</th>
+                    <th class="px-5 py-3"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for song in songs %}
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-5 py-4">
+                        <a href="/songs/{{ song.slug }}" class="font-medium text-gray-900 hover:text-primary transition-colors">
+                            {{ song.title }}
+                        </a>
+                    </td>
+                    <td class="px-5 py-4 text-gray-500 hidden sm:table-cell">
+                        {% if song.song_key %}{{ song.song_key }}{% else %}—{% endif %}
+                    </td>
+                    <td class="px-5 py-4 hidden md:table-cell">
+                        <div class="flex flex-wrap gap-1">
+                            {% for tag in song.tags %}
+                            <a href="/songs?tag={{ tag.slug }}" class="tag-badge hover:bg-primary/20 transition-colors">{{ tag.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </td>
+                    <td class="px-5 py-4 text-right">
+                        <a href="/songs/{{ song.slug }}" class="btn-primary text-xs px-3 py-1.5">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% else %}
+    <div class="text-center py-16 text-gray-500">
+        <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+        </svg>
+        <p class="font-medium text-gray-700 mb-1">No songs found</p>
+        <p class="text-sm">Try adjusting your search or filters.</p>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

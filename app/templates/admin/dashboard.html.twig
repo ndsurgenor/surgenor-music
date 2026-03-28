@@ -1,0 +1,35 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% set active_nav = 'dashboard' %}
+
+{% block content %}
+
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
+    <div class="card text-center">
+        <p class="text-3xl font-bold text-primary">{{ stats.total_songs }}</p>
+        <p class="text-sm text-gray-500 mt-1">Songs</p>
+    </div>
+    <div class="card text-center">
+        <p class="text-3xl font-bold text-primary">{{ stats.total_files }}</p>
+        <p class="text-sm text-gray-500 mt-1">Files</p>
+    </div>
+    <div class="card text-center">
+        <p class="text-3xl font-bold text-primary">{{ stats.total_tags }}</p>
+        <p class="text-sm text-gray-500 mt-1">Tags</p>
+    </div>
+</div>
+
+<div class="flex gap-3">
+    <a href="/admin/songs/create" class="btn-primary">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        Add New Song
+    </a>
+    <a href="/admin/songs" class="btn-secondary">Manage Songs</a>
+</div>
+
+{% endblock %}

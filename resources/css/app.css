@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    audio {
+        @apply w-full;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center px-6 py-2.5 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+
+    .btn-primary {
+        @apply btn bg-primary text-white hover:bg-primary-700 focus:ring-primary;
+    }
+
+    .btn-primary-lg {
+        @apply btn-primary px-8 py-3 text-base;
+    }
+
+    .btn-accent-outline {
+        @apply btn border border-accent text-white hover:bg-accent/20 focus:ring-accent;
+    }
+
+    .btn-accent-outline-lg {
+        @apply btn-accent-outline px-8 py-3 text-base;
+    }
+
+    .btn-secondary {
+        @apply btn bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-gray-300;
+    }
+
+    .btn-danger {
+        @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+    }
+
+    .form-input {
+        @apply w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary;
+    }
+
+    .form-label {
+        @apply block text-sm font-medium text-gray-700 mb-1;
+    }
+
+    .tag-badge {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary;
+    }
+
+    .card {
+        @apply bg-white border border-gray-200 rounded-xl p-6;
+    }
+}

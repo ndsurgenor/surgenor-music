@@ -1,0 +1,167 @@
+{% extends 'admin/base.html.twig' %}
+
+{% set is_edit = song and song.id is defined %}
+
+{% block title %}{{ is_edit ? 'Edit: ' ~ song.title : 'Add Song' }}{% endblock %}
+{% block page_title %}{{ is_edit ? 'Edit Song' : 'Add New Song' }}{% endblock %}
+
+{% set active_nav = 'songs' %}
+
+{% block content %}
+
+{% if error %}
+<div class="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-700 mb-6">
+    {{ error }}
+</div>
+{% endif %}
+
+<form method="POST"
+      action="{{ is_edit ? '/admin/songs/' ~ song.id ~ '/edit' : '/admin/songs/create' }}"
+      enctype="multipart/form-data"
+      class="space-y-8 max-w-3xl">
+
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+
+    {# ── Basic details ─────────────────────────────────────────────── #}
+    <div class="card space-y-5">
+        <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Song Details</h2>
+
+        <div>
+            <label for="title" class="form-label">Title <span class="text-red-500">*</span></label>
+            <input type="text" id="title" name="title"
+                   value="{{ song.title ?? '' }}"
+                   required class="form-input" placeholder="Song title">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="song_key" class="form-label">Key</label>
+                <input type="text" id="song_key" name="song_key"
+                       value="{{ song.song_key ?? '' }}"
+                       class="form-input" placeholder="e.g. G, Bb, F#m">
+            </div>
+            <div>
+                <label for="tempo" class="form-label">Tempo (BPM)</label>
+                <input type="number" id="tempo" name="tempo"
+                       value="{{ song.tempo ?? '' }}"
+                       class="form-input" placeholder="e.g. 72" min="1" max="300">
+            </div>
+        </div>
+
+        <div>
+            <label for="tags" class="form-label">Themes / Tags</label>
+            <input type="text" id="tags" name="tags"
+                   value="{{ song.tags is defined ? song.tags|map(t => t.name)|join(', ') : '' }}"
+                   class="form-input" placeholder="Comma-separated, e.g. Praise, Communion, Advent">
+            <p class="mt-1 text-xs text-gray-500">Separate multiple tags with commas. New tags are created automatically.</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <input type="checkbox" id="featured" name="featured"
+                   class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                   {% if song.featured ?? false %}checked{% endif %}>
+            <label for="featured" class="text-sm font-medium text-gray-700">Show on homepage as a featured song</label>
+        </div>
+    </div>
+
+    {# ── Lyrics ────────────────────────────────────────────────────── #}
+    <div class="card space-y-4">
+        <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Lyrics</h2>
+        <div>
+            <label for="lyrics" class="form-label">Lyrics</label>
+            <textarea id="lyrics" name="lyrics" rows="12"
+                      class="form-input font-mono text-sm resize-y"
+                      placeholder="Paste lyrics here. Line breaks are preserved.">{{ song.lyrics ?? '' }}</textarea>
+        </div>
+    </div>
+
+    {# ── Copyright ─────────────────────────────────────────────────── #}
+    <div class="card space-y-4">
+        <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Copyright &amp; Licensing</h2>
+        <div>
+            <label for="copyright_info" class="form-label">Copyright information</label>
+            <textarea id="copyright_info" name="copyright_info" rows="4"
+                      class="form-input resize-y"
+                      placeholder="e.g. Words and music by Nathan Surgenor. © 2024 Nathan Surgenor. CCLI Song #...">{{ song.copyright_info ?? '' }}</textarea>
+        </div>
+        <div>
+            <label for="notes" class="form-label">Admin notes <span class="text-gray-400 font-normal">(not shown publicly)</span></label>
+            <textarea id="notes" name="notes" rows="3"
+                      class="form-input resize-y"
+                      placeholder="Internal notes about this song…">{{ song.notes ?? '' }}</textarea>
+        </div>
+    </div>
+
+    {# ── Sheet Music files ─────────────────────────────────────────── #}
+    <div class="card space-y-4">
+        <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Sheet Music (PDF)</h2>
+
+        {% if is_edit %}
+        {% set sm_files = song.files|filter(f => f.type == 'sheet_music') %}
+        {% if sm_files|length %}
+        <div class="space-y-2">
+            <p class="text-xs font-medium text-gray-500 uppercase tracking-wide">Existing files</p>
+            {% for file in sm_files %}
+            <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg border border-gray-200 text-sm">
+                <span class="text-gray-700">{{ file.label }} <span class="text-gray-400">({{ file.filename }})</span></span>
+                <form method="POST" action="/admin/files/{{ file.id }}/delete" class="inline">
+                    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                    <button type="submit" class="text-red-500 hover:text-red-700 text-xs font-medium"
+                            data-confirm="Remove this file?">Remove</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endif %}
+
+        <div>
+            <label class="form-label">Upload new PDF files</label>
+            <input type="file" name="sheet_music[]" multiple accept=".pdf"
+                   class="block w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary-700 transition-colors cursor-pointer">
+            <p class="mt-1 text-xs text-gray-500">You can select multiple PDF files at once.</p>
+        </div>
+    </div>
+
+    {# ── Audio files ───────────────────────────────────────────────── #}
+    <div class="card space-y-4">
+        <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Audio Files</h2>
+
+        {% if is_edit %}
+        {% set audio_files = song.files|filter(f => f.type == 'audio') %}
+        {% if audio_files|length %}
+        <div class="space-y-2">
+            <p class="text-xs font-medium text-gray-500 uppercase tracking-wide">Existing files</p>
+            {% for file in audio_files %}
+            <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg border border-gray-200 text-sm">
+                <span class="text-gray-700">{{ file.label }} <span class="text-gray-400">({{ file.filename }})</span></span>
+                <form method="POST" action="/admin/files/{{ file.id }}/delete" class="inline">
+                    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                    <button type="submit" class="text-red-500 hover:text-red-700 text-xs font-medium"
+                            data-confirm="Remove this file?">Remove</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endif %}
+
+        <div>
+            <label class="form-label">Upload new audio files</label>
+            <input type="file" name="audio[]" multiple accept="audio/*"
+                   class="block w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary-700 transition-colors cursor-pointer">
+            <p class="mt-1 text-xs text-gray-500">Accepts MP3, WAV, M4A, FLAC and other audio formats.</p>
+        </div>
+    </div>
+
+    {# ── Actions ───────────────────────────────────────────────────── #}
+    <div class="flex items-center gap-3">
+        <button type="submit" class="btn-primary">
+            {{ is_edit ? 'Save Changes' : 'Create Song' }}
+        </button>
+        <a href="/admin/songs" class="btn-secondary">Cancel</a>
+    </div>
+
+</form>
+
+{% endblock %}

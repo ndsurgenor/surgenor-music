@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin{% endblock %} — Surgenor Music</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body class="font-sans h-full">
+<div class="min-h-full">
+
+    {# ── Sidebar ───────────────────────────────────────────────────── #}
+    <div class="hidden md:fixed md:inset-y-0 md:flex md:w-56 md:flex-col">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-primary px-4 pb-4">
+            <div class="flex h-16 shrink-0 items-center">
+                <a href="/" class="flex items-center gap-0" target="_blank" rel="noopener">
+                    <span class="text-white font-semibold tracking-tight text-sm">surgenor</span>
+                    <span class="inline-flex items-center gap-[2px] mx-1">
+                        <span class="w-[2px] h-[13px] bg-accent rounded-sm"></span>
+                        <span class="w-[2px] h-[13px] bg-accent rounded-sm"></span>
+                        <span class="w-[2px] h-[13px] bg-accent rounded-sm"></span>
+                    </span>
+                    <span class="text-white font-semibold tracking-tight text-sm">usic</span>
+                </a>
+            </div>
+
+            <nav class="flex flex-1 flex-col">
+                <ul class="flex flex-1 flex-col gap-y-1">
+                    <li>
+                        <a href="/admin"
+                           class="group flex gap-x-3 rounded-lg p-2 text-sm font-medium text-primary-100 hover:bg-primary-700 hover:text-white transition-colors {% if active_nav == 'dashboard' %}bg-primary-700 text-white{% endif %}">
+                            <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/songs"
+                           class="group flex gap-x-3 rounded-lg p-2 text-sm font-medium text-primary-100 hover:bg-primary-700 hover:text-white transition-colors {% if active_nav == 'songs' %}bg-primary-700 text-white{% endif %}">
+                            <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                            </svg>
+                            Songs
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mt-auto">
+                    <a href="/admin/logout"
+                       class="flex gap-x-3 rounded-lg p-2 text-sm font-medium text-primary-200 hover:bg-primary-700 hover:text-white transition-colors">
+                        <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        Sign out
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    {# ── Main area ─────────────────────────────────────────────────── #}
+    <div class="md:pl-56">
+        {# Top bar #}
+        <div class="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-6 shadow-sm">
+            <h1 class="text-sm font-semibold text-gray-900">{% block page_title %}Admin{% endblock %}</h1>
+            <div class="ml-auto flex items-center gap-3">
+                <a href="/" target="_blank" class="text-xs text-gray-500 hover:text-primary transition-colors">View site ↗</a>
+            </div>
+        </div>
+
+        {# Flash message #}
+        {% if flash %}
+        <div id="flash-message" class="{% if flash.type == 'success' %}bg-green-50 border-green-200 text-green-800{% else %}bg-red-50 border-red-200 text-red-800{% endif %} border-b px-6 py-3 text-sm font-medium">
+            {{ flash.message }}
+        </div>
+        {% endif %}
+
+        <main class="p-6">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</div>
+
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

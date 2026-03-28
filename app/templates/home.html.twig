@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Surgenor Music — Worship Songs &amp; Resources{% endblock %}
+
+{% block content %}
+
+{# ── Hero ──────────────────────────────────────────────────────────── #}
+<section class="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-gray-900">
+
+    {# Background image — place your photo at public_html/assets/images/hero.jpg #}
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/assets/images/hero.jpg')"></div>
+    <div class="absolute inset-0 bg-black/55"></div>
+
+    <div class="relative z-10 text-center text-white px-6 max-w-3xl mx-auto py-20">
+        <h1 class="text-4xl md:text-5xl font-light leading-tight">
+            Worship <strong class="font-bold">Songs</strong> &amp; <strong class="font-bold">Resources</strong><br>
+            from musician <strong class="font-bold">Nathan Surgenor</strong>
+        </h1>
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-10">
+            <a href="/songs" class="btn-primary-lg">Song Catalogue</a>
+            <a href="/contact" class="btn-accent-outline-lg">Contact Us</a>
+        </div>
+    </div>
+</section>
+
+{# ── Featured songs ────────────────────────────────────────────────── #}
+{% if featured %}
+<section class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-2xl font-bold text-gray-900 mb-8">Featured Songs</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {% for song in featured %}
+        <a href="/songs/{{ song.slug }}" class="card hover:border-primary hover:shadow-sm transition-all group">
+            <h3 class="font-semibold text-gray-900 group-hover:text-primary transition-colors mb-1">
+                {{ song.title }}
+            </h3>
+            {% if song.song_key %}
+            <p class="text-sm text-gray-500">Key of {{ song.song_key }}</p>
+            {% endif %}
+            {% if song.tags %}
+            <div class="flex flex-wrap gap-1 mt-3">
+                {% for tag in song.tags %}
+                <span class="tag-badge">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+    <div class="mt-8">
+        <a href="/songs" class="btn-primary">View All Songs</a>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}
