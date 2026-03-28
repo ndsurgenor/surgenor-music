@@ -40,6 +40,9 @@ module.exports = {
             },
         },
     },
+    safelist: [
+        'animate-spin',
+    ],
     plugins: [
         require('@tailwindcss/forms'),
     ],

@@ -15,28 +15,27 @@
         <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Hero Text</h2>
         <p class="text-sm text-gray-500">This text appears over the hero image on the homepage.</p>
 
-        {# Toolbar #}
-        <div class="flex items-center gap-1 border border-gray-300 rounded-t-lg px-2 py-1.5 bg-gray-50 border-b-0">
-            <button type="button" data-command="bold"
-                    class="rich-btn w-8 h-8 flex items-center justify-center rounded font-bold text-sm text-gray-700 hover:bg-gray-200 transition-colors"
-                    title="Bold (Ctrl+B)"><strong>B</strong></button>
-            <button type="button" data-command="italic"
-                    class="rich-btn w-8 h-8 flex items-center justify-center rounded text-sm text-gray-700 hover:bg-gray-200 transition-colors"
-                    title="Italic (Ctrl+I)"><em>I</em></button>
-            <button type="button" data-command="underline"
-                    class="rich-btn w-8 h-8 flex items-center justify-center rounded text-sm text-gray-700 hover:bg-gray-200 transition-colors underline"
-                    title="Underline (Ctrl+U)">U</button>
-            <div class="w-px h-5 bg-gray-300 mx-1"></div>
-            <button type="button" data-command="removeFormat"
-                    class="rich-btn w-8 h-8 flex items-center justify-center rounded text-xs text-gray-500 hover:bg-gray-200 transition-colors"
-                    title="Clear formatting">✕</button>
-        </div>
+        {# Toolbar + editor wrapped together so the JS can scope button lookups #}
+        <div data-rich-toolbar>
+            <div class="flex items-center gap-1 border border-gray-300 rounded-t-lg px-2 py-1.5 bg-gray-50 border-b-0">
+                <button type="button" data-command="bold"
+                        class="rich-btn w-8 h-8 flex items-center justify-center rounded font-bold text-sm text-gray-700 hover:bg-gray-200 transition-colors"
+                        title="Bold (Ctrl+B)"><strong>B</strong></button>
+                <button type="button" data-command="italic"
+                        class="rich-btn w-8 h-8 flex items-center justify-center rounded text-sm text-gray-700 hover:bg-gray-200 transition-colors"
+                        title="Italic (Ctrl+I)"><em>I</em></button>
+                <div class="w-px h-5 bg-gray-300 mx-1"></div>
+                <button type="button" data-command="removeFormat"
+                        class="rich-btn w-8 h-8 flex items-center justify-center rounded text-xs text-gray-500 hover:bg-gray-200 transition-colors"
+                        title="Clear formatting">✕</button>
+            </div>
 
-        {# Editable area #}
-        <div id="hero-editor"
-             contenteditable="true"
-             class="min-h-[100px] border border-gray-300 rounded-b-lg px-4 py-3 text-gray-900 text-lg leading-relaxed focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white"
-        >{{ settings.hero_text|raw }}</div>
+            <div id="hero-editor"
+                 contenteditable="true"
+                 data-rich-editor="hero-text-input"
+                 class="min-h-[100px] border border-gray-300 rounded-b-lg px-4 py-3 text-gray-900 text-lg leading-relaxed focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white"
+            >{{ settings.hero_text|raw }}</div>
+        </div>
 
         {# Hidden input synced on submit #}
         <input type="hidden" name="hero_text" id="hero-text-input">
@@ -68,45 +67,4 @@
     <button type="submit" class="btn-primary">Save Settings</button>
 </form>
 
-{% endblock %}
-
-{% block scripts %}
-<script>
-    const editor     = document.getElementById('hero-editor');
-    const hiddenInput = document.getElementById('hero-text-input');
-
-    // Keep hidden input in sync at all times
-    function syncInput() {
-        hiddenInput.value = editor.innerHTML;
-    }
-    syncInput(); // populate on page load so a save with no changes still works
-
-    editor.addEventListener('input', syncInput);
-
-    // Toolbar buttons — mousedown+preventDefault keeps focus inside the editor
-    document.querySelectorAll('.rich-btn').forEach(btn => {
-        btn.addEventListener('mousedown', e => {
-            e.preventDefault();
-            document.execCommand(btn.dataset.command, false, null);
-            syncInput();
-            updateToolbarState();
-        });
-    });
-
-    // Reflect active formatting in toolbar
-    function updateToolbarState() {
-        ['bold', 'italic', 'underline'].forEach(cmd => {
-            const btn = document.querySelector(`[data-command="${cmd}"]`);
-            if (!btn) return;
-            const active = document.queryCommandState(cmd);
-            btn.classList.toggle('bg-primary/10', active);
-            btn.classList.toggle('text-primary',   active);
-        });
-    }
-
-    editor.addEventListener('keyup',   updateToolbarState);
-    editor.addEventListener('mouseup', updateToolbarState);
-
-    updateToolbarState();
-</script>
 {% endblock %}

@@ -165,8 +165,9 @@ class AdminController extends BaseController
         $this->requireAuth();
         $this->validateCsrf();
 
-        // Hero text — stored as raw HTML from the rich-text editor
+        // Hero text — normalise formatting tags to Tailwind span classes
         $heroText = trim($_POST['hero_text'] ?? '');
+        $heroText = $this->normalisHeroText($heroText);
         Settings::set('hero_text', $heroText);
 
         // Hero image — only replace if a new file was uploaded
@@ -269,6 +270,17 @@ class AdminController extends BaseController
                 }
             }
         }
+    }
+
+    private function normalisHeroText(string $html): string
+    {
+        $html = preg_replace('/<(b|strong)(\s[^>]*)?>/', '<span class="font-semibold">', $html);
+        $html = preg_replace('/<\/(b|strong)>/', '</span>', $html);
+        $html = preg_replace('/<(em|i)(\s[^>]*)?>/', '<span class="italic">', $html);
+        $html = preg_replace('/<\/(em|i)>/', '</span>', $html);
+        $html = preg_replace('/<u(\s[^>]*)?>/', '<span class="underline">', $html);
+        $html = preg_replace('/<\/u>/', '</span>', $html);
+        return $html;
     }
 
     private function slugify(string $text): string
