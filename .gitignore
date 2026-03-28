@@ -7,3 +7,4 @@ public_html/uploads/*
 !public_html/uploads/.gitkeep
 public_html/assets/images/hero.jpg
 package-lock.json
+CLAUDE.md

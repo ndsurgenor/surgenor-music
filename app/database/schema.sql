@@ -24,6 +24,15 @@ CREATE TABLE IF NOT EXISTS song_tags (
     PRIMARY KEY (song_id, tag_id)
 );
 
+CREATE TABLE IF NOT EXISTS settings (
+    key   TEXT NOT NULL PRIMARY KEY,
+    value TEXT
+);
+
+INSERT OR IGNORE INTO settings (key, value) VALUES
+    ('hero_image',    NULL),
+    ('hero_text',     'Worship <strong>Songs</strong> &amp; <strong>Resources</strong> from musician <strong>Nathan Surgenor</strong>');
+
 CREATE TABLE IF NOT EXISTS song_files (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     song_id    INTEGER NOT NULL REFERENCES songs(id) ON DELETE CASCADE,

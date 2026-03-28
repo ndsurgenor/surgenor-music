@@ -10,6 +10,11 @@
     audio {
         @apply w-full;
     }
+
+    /* Ensure rich-text formatting tags render correctly inside font-weight-overriding parents */
+    .hero-text strong, .hero-text b { font-weight: 700; }
+    .hero-text em, .hero-text i     { font-style: italic; }
+    .hero-text u                    { text-decoration: underline; }
 }
 
 @layer components {
