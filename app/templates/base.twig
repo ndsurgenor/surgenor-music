@@ -9,7 +9,7 @@
     <meta name="description" content="{% block meta_description %}Worship songs and resources from musician Nathan Surgenor.{% endblock %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plaster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/app.css">
     {% block head %}{% endblock %}
 </head>
@@ -22,21 +22,19 @@
         <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
 
             {# Branding #}
-            <a href="/" class="flex items-center" aria-label="Surgenor Music home">
-                <span class="text-primary font-semibold text-xl tracking-tight">surgenor</span>
-                <span class="inline-flex items-center gap-[3px] mx-1.5 translate-y-px">
-                    <span class="w-[3px] h-[17px] bg-accent rounded-sm"></span>
-                    <span class="w-[3px] h-[17px] bg-accent rounded-sm"></span>
-                    <span class="w-[3px] h-[17px] bg-accent rounded-sm"></span>
-                </span>
-                <span class="text-primary font-semibold text-xl tracking-tight">usic</span>
-            </a>
+            <h1>
+                <a href="/" class="flex items-center" aria-label="Surgenor Music home">
+                    <span class="text-primary font-bold text-4xl tracking-tight mr-1">surgenor</span>
+                    <span class="text-secondary uppercase font-semibold text-4xl tracking-tight">m</span>
+                    <span class="text-primary font-semibold text-4xl tracking-tight">usic</span>
+                </a>
+            </h1>
 
             {# Desktop #}
             <ul class="hidden md:flex items-center gap-8">
-                <li><a href="/" class="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Home</a></li>
-                <li><a href="/songs" class="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Music</a></li>
-                <li><a href="/contact" class="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Contact</a></li>
+                <li><a href="/" class="text-primary hover:text-primary transition-colors font-medium">Home</a></li>
+                <li><a href="/songs" class="text-primary hover:text-primary transition-colors font-medium">Music</a></li>
+                <li><a href="/contact" class="text-primary hover:text-primary transition-colors font-medium">Contact</a></li>
             </ul>
 
             {# Mobile #}
@@ -66,7 +64,8 @@
 
     {# MAIN CONTENT #}
     <main class="flex-1">
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
 
     {# FOOTER #}
@@ -76,12 +75,8 @@
 
                 <div>
                     <div class="flex items-center mb-3">
-                        <span class="text-primary font-semibold tracking-tight">surgenor</span>
-                        <span class="inline-flex items-center gap-[3px] mx-1.5">
-                            <span class="w-[3px] h-[15px] bg-accent rounded-sm"></span>
-                            <span class="w-[3px] h-[15px] bg-accent rounded-sm"></span>
-                            <span class="w-[3px] h-[15px] bg-accent rounded-sm"></span>
-                        </span>
+                        <span class="text-primary font-semibold tracking-tight mr-1">surgenor</span>
+                        <span class="text-secondary uppercase font-semibold tracking-tight">m</span>
                         <span class="text-primary font-semibold tracking-tight">usic</span>
                     </div>
                     <p class="text-gray-500 text-sm leading-relaxed">Worship songs &amp; resources from musician Nathan Surgenor.</p>

@@ -21,6 +21,11 @@
 }
 
 @layer components {
+    .text-secondary {
+        @apply font-secondary text-accent;
+    }
+
+
     .btn {
         @apply inline-flex items-center justify-center px-6 py-2.5 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
     }
