@@ -4,13 +4,13 @@
 {% block content %}
 
 {# HERO #}
-<section class="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-gray-900">
+<section class="relative min-h-[560px] flex items-end justify-center overflow-hidden bg-gray-900">
 
     {# Background image — place your photo at public_html/assets/images/hero.jpg #}
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ hero_image ? '/assets/images/' ~ hero_image : '/assets/images/hero.jpg' }}')"></div>
     <div class="absolute inset-0 bg-black/55"></div>
 
-    <div class="relative z-10 text-center text-white px-6 max-w-3xl mx-auto py-20">
+    <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto py-20">
         <h1 class="hero-text text-4xl md:text-5xl font-light leading-tight">
             {{ hero_text|raw }}
         </h1>
