@@ -15,6 +15,9 @@
     .hero-text strong, .hero-text b { font-weight: 700; }
     .hero-text em, .hero-text i     { font-style: italic; }
     .hero-text u                    { text-decoration: underline; }
+
+    /* Prevent browser-injected block elements (div/p from contenteditable) from breaking line-height */
+    .hero-text div, .hero-text p { line-height: inherit; margin: 0; }
 }
 
 @layer components {
