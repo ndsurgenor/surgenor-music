@@ -6,10 +6,10 @@ const waitOn = require('wait-on');
 const path   = require('path');
 const { spawn } = require('child_process');
 
-const URL     = 'http://localhost:8000';
+const URL     = 'http://surgenormusic.test:8000';
 const openCli = path.join(__dirname, '..', 'node_modules', '.bin', 'open-cli');
 
-waitOn({ resources: ['tcp:localhost:8000'], timeout: 15000 }, (err) => {
+waitOn({ resources: ['tcp:surgenormusic.test:8000'], timeout: 15000 }, (err) => {
     if (err) {
         console.error('[browser] Server did not respond in time:', err.message);
         process.exit(1);

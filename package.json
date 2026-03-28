@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "tailwindcss -i ./resources/css/app.css -o ./public_html/assets/css/app.css --watch",
         "build": "tailwindcss -i ./resources/css/app.css -o ./public_html/assets/css/app.css --minify",
-        "php": "php -S localhost:8000 -t public_html",
+        "php": "php -S surgenormusic.test:8000 -t public_html",
         "start": "concurrently --names \"php,css\" --prefix-colors \"cyan,yellow\" \"npm run php\" \"npm run dev\"",
         "view": "concurrently --names \"php,css,browser\" --prefix-colors \"cyan,yellow,green\" \"npm run php\" \"npm run dev\" \"node scripts/open-browser.js\""
     },

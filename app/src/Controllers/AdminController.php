@@ -90,7 +90,7 @@ class AdminController extends BaseController
         Song::syncTags($songId, $this->tagsFromPost());
         $this->handleFileUploads($songId);
 
-        $this->flash('success', ""{$data['title']}" has been created.");
+        $this->flash('success', "\"{$data['title']}\" has been created.");
         $this->redirect('/admin/songs');
     }
 
@@ -122,7 +122,7 @@ class AdminController extends BaseController
         Song::syncTags($id, $this->tagsFromPost());
         $this->handleFileUploads($id);
 
-        $this->flash('success', ""{$data['title']}" has been updated.");
+        $this->flash('success', "\"{$data['title']}\" has been updated.");
         $this->redirect('/admin/songs');
     }
 
@@ -136,7 +136,7 @@ class AdminController extends BaseController
         Song::delete($id);
 
         $title = $song['title'] ?? 'Song';
-        $this->flash('success', ""{$title}" has been deleted.");
+        $this->flash('success', "\"{$title}\" has been deleted.");
         $this->redirect('/admin/songs');
     }
 
