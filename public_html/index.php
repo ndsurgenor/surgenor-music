@@ -56,7 +56,5 @@ $router->post('/admin/songs/{id}/delete', [AdminController::class, 'deleteSong']
 
 $router->post('/admin/files/{file_id}/delete', [AdminController::class, 'deleteFile']);
 
-$router->get('/admin/settings', [AdminController::class, 'settings']);
-$router->post('/admin/settings', [AdminController::class, 'updateSettings']);
 
 $router->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

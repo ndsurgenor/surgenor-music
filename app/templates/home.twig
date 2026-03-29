@@ -4,27 +4,24 @@
 {% block content %}
 
 {# HERO #}
-<section class="relative min-h-[600px] flex items-end justify-center">
-    {# Musical staff — 5 accent lines, slightly angled, sit behind image and show on wings at 2xl+ #}
-    <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div class="absolute inset-y-0 left-[-10%] right-[-10%] -rotate-[-1deg] origin-center">
-            <div class="absolute top-[40%] inset-x-0 h-[4px] bg-accent/50"></div>
-            <div class="absolute top-[45%] inset-x-0 h-[3px] bg-accent/75"></div>
-            <div class="absolute top-[50%] inset-x-0 h-[4px] bg-accent/50"></div>
-            <div class="absolute top-[55%] inset-x-0 h-[4px] bg-accent/50"></div>
-            <div class="absolute top-[60%] inset-x-0 h-[3px] bg-accent/75"></div>
-        </div>
-    </div>
-    {# Image — capped at 2xl, centred; at 2xl+ edges fade into dark bg revealing the staff on the wings #}
-    <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-screen-2xl overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ hero_image ? '/assets/images/' ~ hero_image : '/assets/images/hero.jpg' }}')"></div>
-        <div class="absolute inset-0 bg-black/15"></div>
+<section class="relative flex items-end justify-center bg-black/85 overflow-hidden min-h-[600px]">
+    {# Video hero — poster acts as fallback if video can't play #}
+    <div class="absolute inset-0 max-w-screen-3xl mx-auto left-1/2 -translate-x-1/2 w-full">
+        <video autoplay muted loop playsinline poster="/assets/images/hero.jpg"
+               class="w-full h-full object-cover">
+            <source src="/assets/videos/hero.webm" type="video/webm">
+        </video>
+        <div class="absolute inset-0 bg-gray-950/75"></div>
     </div>
     {# Text & CTAs #}
-    <div class="relative z-10 text-center text-white px-6 max-w-3xl mx-auto py-20 rounded-lg">
-        <h1 class="hero-text text-3xl md:text-4xl font-light leading-tight">
-            {{ hero_text|raw }}
+    <div class="absolute z-10 text-center text-white px-6 max-w-3xl mx-auto py-20 rounded-tr-3xl bottom-0">
+        <h1 class="hero-text text-4xl md:text-5xl ![line-height:1.15]">
+            Worship <span class="font-semibold">Songs</span> & <span class="font-semibold">Resources</span>
+            <span class="font-light">for the local church</span>
         </h1>
+        <h2 class="hero-text text-lg md:text-xl ![line-height:1.15] mt-4 text-gray-100">
+            from musician <span class="font-semibold">Nathan Surgenor</span>
+        </h2>
         <div class="flex flex-wrap items-center justify-center gap-4 mt-10">
             <a href="/songs" class="btn-primary-lg">Song Catalogue</a>
             <a href="/contact" class="btn-accent-outline-lg">Contact Us</a>

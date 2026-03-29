@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\Song;
-use App\Models\Settings;
 
 class AdminController extends BaseController
 {
@@ -148,54 +147,6 @@ class AdminController extends BaseController
 
         Song::deleteFile((int) $params['file_id']);
         $this->redirect($_SERVER['HTTP_REFERER'] ?? '/admin/songs');
-    }
-
-    // -------------------------------------------------------------------------
-    // Homepage settings
-    // -------------------------------------------------------------------------
-
-    public function settings(array $params = []): void
-    {
-        $this->requireAuth();
-        $this->render('admin/settings.twig', ['settings' => Settings::all()]);
-    }
-
-    public function updateSettings(array $params = []): void
-    {
-        $this->requireAuth();
-        $this->validateCsrf();
-
-        // Hero text — normalise formatting tags to Tailwind span classes
-        $heroText = trim($_POST['hero_text'] ?? '');
-        $heroText = $this->normalisHeroText($heroText);
-        Settings::set('hero_text', $heroText);
-
-        // Hero image — only replace if a new file was uploaded
-        if (!empty($_FILES['hero_image']['tmp_name']) && $_FILES['hero_image']['error'] === UPLOAD_ERR_OK) {
-            $imageDir = dirname(__DIR__, 3) . '/public_html/assets/images/';
-
-            if (!is_dir($imageDir)) {
-                mkdir($imageDir, 0755, true);
-            }
-
-            $ext      = strtolower(pathinfo($_FILES['hero_image']['name'], PATHINFO_EXTENSION));
-            $allowed  = ['jpg', 'jpeg', 'png', 'webp'];
-
-            if (in_array($ext, $allowed, true)) {
-                // Remove old hero image if present
-                $current = Settings::get('hero_image');
-                if ($current && file_exists($imageDir . $current)) {
-                    unlink($imageDir . $current);
-                }
-
-                $filename = 'hero.' . $ext;
-                move_uploaded_file($_FILES['hero_image']['tmp_name'], $imageDir . $filename);
-                Settings::set('hero_image', $filename);
-            }
-        }
-
-        $this->flash('success', 'Homepage settings saved.');
-        $this->redirect('/admin/settings');
     }
 
     // -------------------------------------------------------------------------
