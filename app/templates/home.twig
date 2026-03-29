@@ -4,12 +4,24 @@
 {% block content %}
 
 {# HERO #}
-<section class="relative min-h-[560px] flex items-end justify-center overflow-hidden bg-gray-900">
-    {# Image #}
-    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ hero_image ? '/assets/images/' ~ hero_image : '/assets/images/hero.jpg' }}')"></div>
-    <div class="absolute inset-0 bg-black/55"></div>
+<section class="relative min-h-[600px] flex items-end justify-center">
+    {# Musical staff — 5 accent lines, slightly angled, sit behind image and show on wings at 2xl+ #}
+    <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div class="absolute inset-y-0 left-[-10%] right-[-10%] -rotate-[-1deg] origin-center">
+            <div class="absolute top-[40%] inset-x-0 h-[4px] bg-accent/50"></div>
+            <div class="absolute top-[45%] inset-x-0 h-[3px] bg-accent/75"></div>
+            <div class="absolute top-[50%] inset-x-0 h-[4px] bg-accent/50"></div>
+            <div class="absolute top-[55%] inset-x-0 h-[4px] bg-accent/50"></div>
+            <div class="absolute top-[60%] inset-x-0 h-[3px] bg-accent/75"></div>
+        </div>
+    </div>
+    {# Image — capped at 2xl, centred; at 2xl+ edges fade into dark bg revealing the staff on the wings #}
+    <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-screen-2xl overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ hero_image ? '/assets/images/' ~ hero_image : '/assets/images/hero.jpg' }}')"></div>
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
     {# Text & CTAs #}
-    <div class="relative z-10 text-center text-white px-6 max-w-3xl mx-auto py-20">
+    <div class="relative z-10 text-center text-white px-6 max-w-3xl mx-auto py-20 rounded-lg">
         <h1 class="hero-text text-3xl md:text-4xl font-light leading-tight">
             {{ hero_text|raw }}
         </h1>
