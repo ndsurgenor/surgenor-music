@@ -1,11 +1,11 @@
 {% extends 'base.twig' %}
-{% block title %}Worship Resources | Surgenor Music{% endblock %}
+{% block title %}Worship Songs & Resources | Surgenor Music{% endblock %}
 
 {% block content %}
 
 {# HERO #}
 <section class="relative flex items-end justify-center bg-black/85 overflow-hidden min-h-[600px]">
-    {# Video hero — poster acts as fallback if video can't play #}
+    {# Video #}
     <div class="absolute inset-0 max-w-screen-3xl mx-auto left-1/2 -translate-x-1/2 w-full">
         <video autoplay muted loop playsinline poster="/assets/images/hero.jpg"
                class="w-full h-full object-cover">
@@ -14,9 +14,10 @@
         <div class="absolute inset-0 bg-gray-950/75"></div>
     </div>
     {# Text & CTAs #}
-    <div class="absolute z-10 text-center text-white px-6 max-w-3xl mx-auto py-20 rounded-tr-3xl bottom-0">
+    <div class="absolute z-10 text-center text-white px-6 max-w-3xl mx-auto py-20 bottom-0">
         <h1 class="hero-text text-4xl md:text-5xl ![line-height:1.15]">
-            Worship <span class="font-semibold">Songs</span> & <span class="font-semibold">Resources</span>
+            <span class="text-secondary text-5xl md:text-6xl">W</span>orship
+            <span class="font-semibold">Songs</span> & <span class="font-semibold">Resources</span>
             <span class="font-light">for the local church</span>
         </h1>
         <h2 class="hero-text text-lg md:text-xl ![line-height:1.15] mt-4 text-gray-100">
