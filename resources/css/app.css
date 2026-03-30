@@ -31,7 +31,7 @@
     }
 
     .btn-primary {
-        @apply btn bg-primary text-white hover:bg-primary-700 focus:ring-primary;
+        @apply btn border-2 border-primary bg-primary/80 text-white hover:bg-primary-700 focus:ring-primary;
     }
 
     .btn-primary-lg {
@@ -39,7 +39,7 @@
     }
 
     .btn-accent-outline {
-        @apply btn border border-accent text-white hover:bg-accent/20 focus:ring-accent;
+        @apply btn border-2 border-accent text-white hover:bg-accent/20 focus:ring-accent;
     }
 
     .btn-accent-outline-lg {
