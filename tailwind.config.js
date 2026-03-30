@@ -10,7 +10,12 @@ module.exports = {
             colors: {
                 cream:    '#FAF8F5',
                 charcoal: '#2C2C2C',
-                navy:     '#0D1B2A',
+                navy: {
+                    DEFAULT: '#0D1B2A',
+                    400: '#1E3A5F',
+                    500: '#162d4a',
+                    600: '#0D1B2A',
+                },
                 primary: {
                     DEFAULT: '#147972',
                     50:  '#e6f3f2',
@@ -41,6 +46,7 @@ module.exports = {
             fontFamily: {
                 sans:      ['Inter', 'system-ui', 'sans-serif'],
                 secondary: ['Plaster', 'cursive'],
+                hero:      ['Raleway', 'system-ui', 'sans-serif'],
             },
         },
     },

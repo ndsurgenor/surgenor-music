@@ -5,6 +5,7 @@
 @layer base {
     html {
         @apply scroll-smooth;
+        font-size: 17px;
     }
 
     audio {
