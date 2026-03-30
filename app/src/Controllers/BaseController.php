@@ -22,6 +22,7 @@ abstract class BaseController
 
         $this->twig->addGlobal('app_url', rtrim($_ENV['APP_URL'] ?? '', '/'));
         $this->twig->addGlobal('current_year', date('Y'));
+        $this->twig->addGlobal('current_path', parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH));
 
         if (session_status() === PHP_SESSION_ACTIVE) {
             if (!isset($_SESSION['csrf_token'])) {

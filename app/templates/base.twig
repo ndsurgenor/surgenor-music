@@ -22,16 +22,16 @@
         <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
 
             {# Branding #}
-            <a href="/" class="flex items-center font-hero text-primary text-4xl tracking-tighter" aria-label="Surgenor Music home">
+            <a href="/" class="flex items-center font-hero text-primary text-3xl sm:text-4xl tracking-tighter" aria-label="Surgenor Music home">
                 <span class="font-semibold mr-1">surgenor</span>
                 <span class="text-secondary uppercase">m</span>usic
             </a>
 
             {# Desktop #}
             <ul class="hidden md:flex items-center gap-8">
-                <li><a href="/" class="text-primary font-semibold">Home</a></li>
-                <li><a href="/songs" class="text-primary font-semibold">Music</a></li>
-                <li><a href="/contact" class="text-primary font-semibold">Contact</a></li>
+                <li><a href="/" class="relative text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[7px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/' ? 'font-bold' : 'font-medium' }}">Home</a></li>
+                <li><a href="/songs" class="relative text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[7px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path starts with '/songs' ? 'font-bold' : 'font-medium' }}">Music</a></li>
+                <li><a href="/contact" class="relative text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[7px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/contact' ? 'font-bold' : 'font-medium' }}">Contact</a></li>
             </ul>
 
             {# Mobile #}
@@ -44,10 +44,10 @@
 
         {# Mobile menu #}
         <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-cream">
-            <div class="max-w-6xl mx-auto px-6 py-4 space-y-3">
-                <a href="/" class="block text-gray-700 hover:text-primary font-medium py-1">Home</a>
-                <a href="/songs" class="block text-gray-700 hover:text-primary font-medium py-1">Music</a>
-                <a href="/contact" class="block text-gray-700 hover:text-primary font-medium py-1">Contact</a>
+            <div class="max-w-6xl mx-auto px-6 py-4 space-y-3 text-right">
+                <a href="/" class="relative block w-fit ml-auto text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[3px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/' ? 'font-bold' : 'font-medium' }} py-1">Home</a>
+                <a href="/songs" class="relative block w-fit ml-auto text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[3px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path starts with '/songs' ? 'font-bold' : 'font-medium' }} py-1">Music</a>
+                <a href="/contact" class="relative block w-fit ml-auto text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[3px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/contact' ? 'font-bold' : 'font-medium' }} py-1">Contact</a>
             </div>
         </div>
     </header>
