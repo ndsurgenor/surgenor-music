@@ -46,12 +46,13 @@ module.exports = {
             fontFamily: {
                 sans:      ['Inter', 'system-ui', 'sans-serif'],
                 secondary: ['Plaster', 'cursive'],
-                hero:      ['Raleway', 'system-ui', 'sans-serif'],
+                hero:      ['Questrial', 'system-ui', 'sans-serif'],
             },
         },
     },
     safelist: [
         'animate-spin',
+        'rotate-90',
     ],
     plugins: [
         require('@tailwindcss/forms'),

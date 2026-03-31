@@ -8,6 +8,13 @@
         font-size: 17px;
     }
 
+    #mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 250ms ease-in-out;
+    }
+
+
     audio {
         @apply w-full;
     }

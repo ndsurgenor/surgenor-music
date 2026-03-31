@@ -4,8 +4,16 @@ const mobileMenu = document.getElementById('mobile-menu');
 
 if (menuToggle && mobileMenu) {
     menuToggle.addEventListener('click', () => {
-        const isOpen = mobileMenu.classList.toggle('hidden');
-        menuToggle.setAttribute('aria-expanded', String(!isOpen));
+        const isOpen = mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== '0px';
+        if (isOpen) {
+            mobileMenu.style.maxHeight = '0';
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.classList.remove('rotate-90');
+        } else {
+            mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+            menuToggle.setAttribute('aria-expanded', 'true');
+            menuToggle.classList.add('rotate-90');
+        }
     });
 }
 
