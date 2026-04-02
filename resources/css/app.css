@@ -43,7 +43,7 @@
     }
 
     .btn-primary-lg {
-        @apply btn-primary px-8 py-3 text-base;
+        @apply btn-primary rounded rounded-br-2xl px-8 py-3 text-base;
     }
 
     .btn-accent-outline {
@@ -51,7 +51,7 @@
     }
 
     .btn-accent-outline-lg {
-        @apply btn-accent-outline px-8 py-3 text-base;
+        @apply btn-accent-outline rounded rounded-br-2xl px-8 py-3 text-base;
     }
 
     .btn-secondary {
