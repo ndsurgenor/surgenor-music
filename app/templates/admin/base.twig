@@ -19,6 +19,9 @@
                 <a href="/" class="flex items-center font-hero text-white text-xl" target="_blank" rel="noopener">
                     <span class="mr-1">surgenor</span>
                     <span class="text-secondary uppercase tracking-tighter">m</span>usic
+                    <svg class="text-primary-100 w-4 h-4 shrink-0 ml-6 self-center" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                    </svg>
                 </a>
             </div>
 
@@ -62,9 +65,6 @@
         {# Top bar #}
         <div class="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-6 shadow-sm">
             <h1 class="text-sm font-semibold text-gray-900">{% block page_title %}Admin{% endblock %}</h1>
-            <div class="ml-auto flex items-center gap-3">
-                <a href="/" target="_blank" class="text-xs text-gray-500 hover:text-primary transition-colors">View site ↗</a>
-            </div>
         </div>
 
         {# FLASH MESSAGE #}
