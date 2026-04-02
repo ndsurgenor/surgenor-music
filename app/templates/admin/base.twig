@@ -6,7 +6,7 @@
     <title>{% block title %}Admin{% endblock %} — Surgenor Music</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Inter:wght@400;500;600;700&family=Plaster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/app.css">
 </head>
 <body class="font-sans h-full">
@@ -14,16 +14,11 @@
 
     {# SIDEBAR #}
     <div class="hidden md:fixed md:inset-y-0 md:flex md:w-56 md:flex-col">
-        <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-primary px-4 pb-4">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gradient-to-br to-navy/90 from-primary-800 px-4 pb-4">
             <div class="flex h-16 shrink-0 items-center">
-                <a href="/" class="flex items-center gap-0" target="_blank" rel="noopener">
-                    <span class="text-white font-semibold tracking-tight text-sm">surgenor</span>
-                    <span class="inline-flex items-center gap-[2px] mx-1">
-                        <span class="w-[2px] h-[13px] bg-accent rounded-sm"></span>
-                        <span class="w-[2px] h-[13px] bg-accent rounded-sm"></span>
-                        <span class="w-[2px] h-[13px] bg-accent rounded-sm"></span>
-                    </span>
-                    <span class="text-white font-semibold tracking-tight text-sm">usic</span>
+                <a href="/" class="flex items-center font-hero text-white text-xl" target="_blank" rel="noopener">
+                    <span class="mr-1">surgenor</span>
+                    <span class="text-secondary uppercase tracking-tighter">m</span>usic
                 </a>
             </div>
 
@@ -62,7 +57,7 @@
         </div>
     </div>
 
-    {# ── Main area ─────────────────────────────────────────────────── #}
+    {# MAIN AREA #}
     <div class="md:pl-56">
         {# Top bar #}
         <div class="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-6 shadow-sm">
@@ -72,7 +67,7 @@
             </div>
         </div>
 
-        {# Flash message #}
+        {# FLASH MESSAGE #}
         {% if flash %}
         <div id="flash-message" class="{% if flash.type == 'success' %}bg-green-50 border-green-200 text-green-800{% else %}bg-red-50 border-red-200 text-red-800{% endif %} border-b px-6 py-3 text-sm font-medium">
             {{ flash.message }}
