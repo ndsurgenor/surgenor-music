@@ -22,15 +22,16 @@ class AdminController extends BaseController
 
     public function authenticate(array $params = []): void
     {
+        $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
         $hash     = $_ENV['ADMIN_PASSWORD_HASH'] ?? '';
 
-        if ($hash && password_verify($password, $hash)) {
+        if ($username === 'sm-admin' && $hash && password_verify($password, $hash)) {
             $_SESSION['admin_authenticated'] = true;
             $this->redirect('/admin');
         }
 
-        $this->render('admin/login.twig', ['error' => 'Invalid password.']);
+        $this->render('admin/login.twig', ['error' => 'Invalid username or password.']);
     }
 
     public function logout(array $params = []): void

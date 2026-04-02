@@ -31,11 +31,19 @@
             <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 
             <div class="mb-5">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username"
+                       required autofocus autocomplete="username"
+                       class="form-input"
+                       placeholder="">
+            </div>
+
+            <div class="mb-5">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" id="password" name="password"
-                       required autofocus
+                       required autocomplete="current-password"
                        class="form-input"
-                       placeholder="Enter admin password">
+                       placeholder="">
             </div>
 
             <button type="submit" class="btn-primary w-full justify-center">Sign in</button>
