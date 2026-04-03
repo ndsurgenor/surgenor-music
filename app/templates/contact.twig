@@ -6,8 +6,14 @@
 {% block content %}
 <div class="max-w-2xl mx-auto px-6 py-12">
 
-    <h1 class="text-3xl font-bold text-gray-900 mb-2">Get in Touch</h1>
-    <p class="text-gray-500 mb-10">Have a question about a song or resource? Send a message and I'll get back to you.</p>
+    {# HEADER & TEXT #}
+    <div class="text-center mb-10">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Get in Touch</h1>
+        <p class="text-gray-500 text-md">
+            Have a question about a song or anything else?
+            Send a message and we'll get back to you as soon as possible.
+        </p>
+    </div>
 
     {% if sent %}
     <div class="card border-primary/30 bg-primary/5 text-center py-10">
@@ -34,20 +40,18 @@
         <div>
             <label for="name" class="form-label">Name</label>
             <input type="text" id="name" name="name" value="{{ old.name ?? '' }}"
-                   required class="form-input" placeholder="Your name">
+                   required class="form-input">
         </div>
 
         <div>
-            <label for="email" class="form-label">Email address</label>
+            <label for="email" class="form-label">Email</label>
             <input type="email" id="email" name="email" value="{{ old.email ?? '' }}"
-                   required class="form-input" placeholder="you@example.com">
+                   required class="form-input">
         </div>
 
         <div>
             <label for="message" class="form-label">Message</label>
-            <textarea id="message" name="message" rows="6"
-                      required class="form-input resize-none"
-                      placeholder="Your message…">{{ old.message ?? '' }}</textarea>
+            <textarea id="message" name="message" rows="4" required class="form-input"></textarea>
         </div>
 
         <button type="submit" class="btn-primary w-full justify-center">Send Message</button>
