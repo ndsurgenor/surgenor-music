@@ -28,10 +28,11 @@
             </a>
 
             {# Desktop links & icons #}
-            <div class="hidden md:flex items-center gap-8">
+            <div class="hidden min-[925px]:flex items-center gap-8">
                 <ul class="flex items-center gap-8">
                     <li><a href="/" class="relative text-primary hover:text-charcoal transition-colors after:absolute after:left-0 after:h-[5px] after:-bottom-[8px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/' ? 'font-bold' : 'font-medium' }}">Home</a></li>
                     <li><a href="/songs" class="relative text-primary hover:text-charcoal transition-colors after:absolute after:left-0 after:h-[5px] after:-bottom-[8px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path starts with '/songs' ? 'font-bold' : 'font-medium' }}">Music</a></li>
+                    <li><a href="/media" class="relative text-primary hover:text-charcoal transition-colors after:absolute after:left-0 after:h-[5px] after:-bottom-[8px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/media' ? 'font-bold' : 'font-medium' }}">Media</a></li>
                     <li><a href="/contact" class="relative text-primary hover:text-charcoal transition-colors after:absolute after:left-0 after:h-[5px] after:-bottom-[8px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/contact' ? 'font-bold' : 'font-medium' }}">Contact</a></li>
                 </ul>
                 <div class="w-0.5 h-5 bg-gray-300"></div>
@@ -49,7 +50,7 @@
             </div>
 
             {# Mobile #}
-            <button id="menu-toggle" class="md:hidden p-1 rounded-tr-lg border-2 border-accent text-accent bg-white hover:bg-gray-100 transition-colors transition-transform duration-[250ms]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation">
+            <button id="menu-toggle" class="min-[925px]:hidden p-1 rounded-tr-lg border-2 border-accent text-accent bg-white hover:bg-gray-100 transition-colors transition-transform duration-[250ms]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
@@ -57,10 +58,11 @@
         </nav>
 
         {# Mobile menu #}
-        <div id="mobile-menu" class="md:hidden border-t border-gray-100 bg-cream">
+        <div id="mobile-menu" class="min-[925px]:hidden border-t border-gray-100 bg-cream">
             <div class="max-w-6xl mx-auto px-6 py-4 space-y-3 text-right">
                 <a href="/" class="relative block w-fit ml-auto text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[3px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/' ? 'font-bold' : 'font-medium' }} py-1">Home</a>
                 <a href="/songs" class="relative block w-fit ml-auto text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[3px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path starts with '/songs' ? 'font-bold' : 'font-medium' }} py-1">Music</a>
+                <a href="/media" class="relative block w-fit ml-auto text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[3px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/media' ? 'font-bold' : 'font-medium' }} py-1">Media</a>
                 <a href="/contact" class="relative block w-fit ml-auto text-primary hover:text-charcoal transition-colors after:absolute after:bottom-0 after:left-0 after:h-[5px] after:-bottom-[3px] after:w-0 after:bg-accent/70 after:transition-all after:duration-300 hover:after:w-full {{ current_path == '/contact' ? 'font-bold' : 'font-medium' }} py-1">Contact</a>
                 <div class="flex items-center justify-end gap-3 pt-3 border-t border-gray-200">
                     <a href="#" aria-label="Instagram" class="text-gray-500/80 hover:text-rose-500/75 transition-colors">

@@ -13,6 +13,7 @@ use App\Router;
 use App\Controllers\HomeController;
 use App\Controllers\SongController;
 use App\Controllers\ContactController;
+use App\Controllers\MediaController;
 use App\Controllers\AdminController;
 
 // Run database migrations on first boot (creates the SQLite file)
@@ -36,6 +37,8 @@ $router->get('/songs', [SongController::class, 'index']);
 $router->get('/songs/{slug}', [SongController::class, 'show']);
 
 $router->get('/contact', [ContactController::class, 'index']);
+
+$router->get('/media', [MediaController::class, 'index']);
 $router->post('/contact', [ContactController::class, 'submit']);
 
 // -------------------------------------------------------------------------
