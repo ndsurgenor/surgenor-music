@@ -18,15 +18,25 @@ class ContactController extends BaseController
     {
         $this->validateCsrf();
 
-        $name    = trim($_POST['name'] ?? '');
-        $email   = trim($_POST['email'] ?? '');
-        $message = trim($_POST['message'] ?? '');
+        $name         = trim($_POST['name'] ?? '');
+        $email        = trim($_POST['email'] ?? '');
+        $messageType  = trim($_POST['message_type'] ?? '');
+        $message      = trim($_POST['message'] ?? '');
 
-        if (!$name || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$message) {
+        $validTypes = [
+            'Enquiry about a song',
+            'Enquiry about a resource',
+            'Copyright / licensing question',
+            'Website problem',
+            'Feedback or suggestion',
+            'General enquiry',
+        ];
+
+        if (!$name || !filter_var($email, FILTER_VALIDATE_EMAIL) || !in_array($messageType, $validTypes, true) || !$message) {
             $this->render('contact.twig', [
                 'sent'  => false,
                 'error' => 'Please fill in all fields with a valid email address.',
-                'old'   => compact('name', 'email', 'message'),
+                'old'   => ['name' => $name, 'email' => $email, 'message_type' => $messageType, 'message' => $message],
             ]);
             return;
         }
@@ -45,8 +55,8 @@ class ContactController extends BaseController
             $mail->addAddress($_ENV['MAIL_TO']);
             $mail->addReplyTo($email, $name);
 
-            $mail->Subject = "Contact form submission from {$name}";
-            $mail->Body    = "Name: {$name}\nEmail: {$email}\n\n{$message}";
+            $mail->Subject = "[Surgenor Music] {$messageType} — from {$name}";
+            $mail->Body    = "Name: {$name}\nEmail: {$email}\nMessage type: {$messageType}\n\n{$message}";
 
             $mail->send();
 
