@@ -36,40 +36,41 @@
     {# FORM #}
     <form method="POST" action="/contact" class="space-y-6 card">
         <input type="hidden" name="_csrf" value="{{ csrf_token }}">
-
+        {# Name #}
         <div>
             <label for="name" class="form-label">Name <span class="text-accent">*</span></label>
             <input type="text" id="name" name="name" value="{{ old.name ?? '' }}"
                    required class="form-input">
         </div>
-
+        {# Email #}
         <div>
             <label for="email" class="form-label">Email <span class="text-accent">*</span></label>
             <input type="email" id="email" name="email" value="{{ old.email ?? '' }}"
                    required class="form-input">
         </div>
-
+        {# Message Type #}
         <div>
             <label for="message_type" class="form-label">Message Type <span class="text-accent">*</span></label>
             <select id="message_type" name="message_type" required class="form-input">
                 <option value="" disabled {{ old.message_type is not defined or old.message_type == '' ? 'selected' : '' }}>Please select…</option>
-                <option value="Enquiry about a song"              {{ old.message_type ?? '' == 'Enquiry about a song'              ? 'selected' : '' }}>Enquiry about a song</option>
-                <option value="Enquiry about a resource"          {{ old.message_type ?? '' == 'Enquiry about a resource'          ? 'selected' : '' }}>Enquiry about a resource</option>
-                <option value="Copyright / licensing question"    {{ old.message_type ?? '' == 'Copyright / licensing question'    ? 'selected' : '' }}>Copyright / licensing question</option>
-                <option value="Website problem"                   {{ old.message_type ?? '' == 'Website problem'                   ? 'selected' : '' }}>Website problem</option>
-                <option value="Feedback or suggestion"           {{ old.message_type ?? '' == 'Feedback or suggestion'            ? 'selected' : '' }}>Feedback or suggestion</option>
-                <option value="General enquiry"                   {{ old.message_type ?? '' == 'General enquiry'                   ? 'selected' : '' }}>General enquiry</option>
+                <option value="Enquiry about a song" {{ old.message_type ?? '' == 'Enquiry about a song' ? 'selected' : '' }}>Enquiry about a song</option>
+                <option value="Enquiry about a resource" {{ old.message_type ?? '' == 'Enquiry about a resource' ? 'selected' : '' }}>Enquiry about a resource</option>
+                <option value="Copyright / licensing question" {{ old.message_type ?? '' == 'Copyright / licensing question' ? 'selected' : '' }}>Copyright / licensing question</option>
+                <option value="Website problem" {{ old.message_type ?? '' == 'Website problem' ? 'selected' : '' }}>Website problem</option>
+                <option value="Feedback or suggestion" {{ old.message_type ?? '' == 'Feedback or suggestion' ? 'selected' : '' }}>Feedback or suggestion</option>
+                <option value="General enquiry" {{ old.message_type ?? '' == 'General enquiry' ? 'selected' : '' }}>General enquiry</option>
             </select>
         </div>
-
+        {# Message #}
         <div>
             <label for="message" class="form-label">Message <span class="text-accent">*</span></label>
             <textarea id="message" name="message" rows="4" required class="form-input"></textarea>
         </div>
-
+        {# Submit Button #}
         <button type="submit" class="btn-primary w-full justify-center">Send Message</button>
     </form>
 
+    {# MESSAGE #}
     <p class="text-center text-sm text-gray-500 mt-10">
         If you are having trouble with the form, please email us directly at
         <a href="mailto:info@surgenormusic.com" class="text-primary hover:underline">info@surgenormusic.com</a>
