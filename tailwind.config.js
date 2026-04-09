@@ -43,6 +43,9 @@ module.exports = {
                     900: '#2e2505',
                 },
             },
+            screens: {
+                'th': '375px',
+            },
             fontFamily: {
                 sans:      ['Inter', 'system-ui', 'sans-serif'],
                 secondary: ['Plaster', 'cursive'],
