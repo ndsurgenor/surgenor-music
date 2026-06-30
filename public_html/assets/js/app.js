@@ -3,16 +3,17 @@ const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 
 if (menuToggle && mobileMenu) {
+    const menuIcon = menuToggle.querySelector('svg');
     menuToggle.addEventListener('click', () => {
         const isOpen = mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== '0px';
         if (isOpen) {
             mobileMenu.style.maxHeight = '0';
             menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.classList.remove('rotate-90');
+            menuIcon.classList.remove('rotate-90');
         } else {
             mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
             menuToggle.setAttribute('aria-expanded', 'true');
-            menuToggle.classList.add('rotate-90');
+            menuIcon.classList.add('rotate-90');
         }
     });
 }

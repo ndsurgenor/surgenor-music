@@ -11,7 +11,7 @@ module.exports = {
                 cream:    '#FAF8F5',
                 charcoal: '#2C2C2C',
                 navy: {
-                    DEFAULT: '#0D1B2A',
+                    DEFAULT: '#0D1B2F',
                     400: '#1E3A5F',
                     500: '#162d4a',
                     600: '#0D1B2A',
@@ -56,6 +56,7 @@ module.exports = {
     safelist: [
         'animate-spin',
         'rotate-90',
+        '-rotate-90',
     ],
     plugins: [
         require('@tailwindcss/forms'),
