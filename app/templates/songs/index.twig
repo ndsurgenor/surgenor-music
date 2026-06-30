@@ -11,7 +11,7 @@
         <div class="absolute right-12 top-1/2 -translate-y-1/2 rotate-[30deg] font-secondary text-cream leading-none opacity-[0.07] select-none pointer-events-none" style="font-size:24rem">S</div>
         <div class="relative z-10 py-10 sm:py-14">
             <h1 class="font-hero text-3xl sm:text-4xl text-white tracking-wide">Song Catalogue</h1>
-            <p class="mt-3 text-gray-300 text-base sm:text-lg max-w-xl">Browse and search all available songs and resources.</p>
+            <h2 class="mt-3 text-gray-300 text-base sm:text-lg max-w-xl">Browse and search all available songs and their resources</h2>
         </div>
     </div>
 </div>
@@ -31,33 +31,53 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <input type="search" id="q" placeholder="Search by song title and/or CCLI #…" class="form-input pl-9" autocomplete="off">
+                    <input type="search" id="q" placeholder="Search by song title and/or CCLI#" class="form-input pl-9" autocomplete="off">
                 </div>
             </div>
 
             {# Filter by Key #}
             {% if keys %}
-            <div class="sm:w-40">
-                <label for="key" class="sr-only">Filter by key</label>
-                <select id="key" class="form-input">
-                    <option value="">All keys</option>
+            <div class="relative sm:w-40 sm:self-stretch" data-multiselect id="ms-key">
+                <button type="button"
+                        class="w-full h-full rounded-lg border border-gray-300 bg-white shadow-sm px-3 py-2 sm:py-0 text-left text-base font-normal flex items-center justify-between gap-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                        data-multiselect-trigger aria-expanded="false">
+                    <span class="truncate" data-multiselect-label>All keys</span>
+                    <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="absolute z-20 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg hidden max-h-60 overflow-y-auto"
+                     data-multiselect-panel>
                     {% for k in keys %}
-                    <option value="{{ k }}">Key of {{ k }}</option>
+                    <label class="flex items-center gap-2.5 px-3 py-2 hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" value="{{ k }}" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0">
+                        <span class="text-sm text-gray-700">{{ k }}</span>
+                    </label>
                     {% endfor %}
-                </select>
+                </div>
             </div>
             {% endif %}
 
             {# Filter by Tag #}
             {% if tags %}
-            <div class="sm:w-44">
-                <label for="tag" class="sr-only">Filter by tag</label>
-                <select id="tag" class="form-input">
-                    <option value="">All themes</option>
+            <div class="relative sm:w-44 sm:self-stretch" data-multiselect id="ms-tag">
+                <button type="button"
+                        class="w-full h-full rounded-lg border border-gray-300 bg-white shadow-sm px-3 py-2 sm:py-0 text-left text-base font-normal flex items-center justify-between gap-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                        data-multiselect-trigger aria-expanded="false">
+                    <span class="truncate" data-multiselect-label>All themes</span>
+                    <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="absolute z-20 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg hidden max-h-60 overflow-y-auto"
+                     data-multiselect-panel>
                     {% for tag in tags %}
-                    <option value="{{ tag.slug }}">{{ tag.name }}</option>
+                    <label class="flex items-center gap-2.5 px-3 py-2 hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" value="{{ tag.slug }}" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0">
+                        <span class="text-sm text-gray-700">{{ tag.name }}</span>
+                    </label>
                     {% endfor %}
-                </select>
+                </div>
             </div>
             {% endif %}
 
