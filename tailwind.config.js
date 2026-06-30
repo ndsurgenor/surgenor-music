@@ -47,7 +47,7 @@ module.exports = {
                 'th': '375px',
             },
             fontFamily: {
-                sans:      ['Inter', 'system-ui', 'sans-serif'],
+                sans:      ['Outfit', 'system-ui', 'sans-serif'],
                 secondary: ['Plaster', 'cursive'],
                 hero:      ['Questrial', 'system-ui', 'sans-serif'],
             },
