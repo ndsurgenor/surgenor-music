@@ -10,21 +10,14 @@ class SongController extends BaseController
 {
     public function index(array $params = []): void
     {
-        $search    = trim($_GET['q'] ?? '');
-        $filterKey = $_GET['key'] ?? '';
-        $filterTag = $_GET['tag'] ?? '';
-
-        $songs = Song::search($search, ['key' => $filterKey, 'tag' => $filterTag]);
+        $songs = Song::search('', []);
         $keys  = Song::allKeys();
         $tags  = Song::allTags();
 
         $this->render('songs/index.twig', [
-            'songs'     => $songs,
-            'keys'      => $keys,
-            'tags'      => $tags,
-            'search'    => $search,
-            'filterKey' => $filterKey,
-            'filterTag' => $filterTag,
+            'songs' => $songs,
+            'keys'  => $keys,
+            'tags'  => $tags,
         ]);
     }
 

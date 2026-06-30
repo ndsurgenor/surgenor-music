@@ -57,6 +57,8 @@ module.exports = {
         'animate-spin',
         'rotate-90',
         '-rotate-90',
+        'opacity-30',
+        'pointer-events-none',
     ],
     plugins: [
         require('@tailwindcss/forms'),

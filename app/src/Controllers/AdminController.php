@@ -173,6 +173,7 @@ class AdminController extends BaseController
             'title'          => $title,
             'song_key'       => trim($_POST['song_key'] ?? ''),
             'tempo'          => (int) ($_POST['tempo'] ?? 0) ?: null,
+            'ccli_number'    => trim($_POST['ccli_number'] ?? '') ?: null,
             'lyrics'         => trim($_POST['lyrics'] ?? ''),
             'copyright_info' => trim($_POST['copyright_info'] ?? ''),
             'notes'          => trim($_POST['notes'] ?? ''),

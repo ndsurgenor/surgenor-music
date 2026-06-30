@@ -103,8 +103,8 @@ class Song
     public static function create(array $data): int
     {
         Database::query(
-            'INSERT INTO songs (title, slug, song_key, tempo, lyrics, copyright_info, notes, featured)
-             VALUES (:title, :slug, :song_key, :tempo, :lyrics, :copyright_info, :notes, :featured)',
+            'INSERT INTO songs (title, slug, song_key, tempo, ccli_number, lyrics, copyright_info, notes, featured)
+             VALUES (:title, :slug, :song_key, :tempo, :ccli_number, :lyrics, :copyright_info, :notes, :featured)',
             $data
         );
         return Database::lastInsertId();
@@ -117,7 +117,7 @@ class Song
 
         Database::query(
             'UPDATE songs
-             SET title=:title, song_key=:song_key, tempo=:tempo, lyrics=:lyrics,
+             SET title=:title, song_key=:song_key, tempo=:tempo, ccli_number=:ccli_number, lyrics=:lyrics,
                  copyright_info=:copyright_info, notes=:notes, featured=:featured, updated_at=:updated_at
              WHERE id=:id',
             $data

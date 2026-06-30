@@ -78,4 +78,5 @@
     .card {
         @apply bg-white border border-gray-200 rounded-xl p-6;
     }
+
 }

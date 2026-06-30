@@ -28,10 +28,169 @@ if (flash) {
     }, 4000);
 }
 
-// Song catalogue: submit filter form on change
-document.querySelectorAll('[data-auto-submit]').forEach(el => {
-    el.addEventListener('change', () => el.closest('form').submit());
-});
+// Song catalogue: live client-side filtering
+(function () {
+    const searchInput = document.getElementById('q');
+    if (!searchInput) return;
+
+    const keySelect = document.getElementById('key');
+    const tagSelect = document.getElementById('tag');
+    const resetBtn  = document.getElementById('song-reset');
+    const rows      = document.querySelectorAll('[data-song-row]');
+    const countEl   = document.getElementById('song-count');
+    const noResults = document.getElementById('song-no-results');
+
+    function filterSongs() {
+        const q   = searchInput.value.toLowerCase().trim();
+        const key = keySelect ? keySelect.value : '';
+        const tag = tagSelect ? tagSelect.value : '';
+
+        let visible = 0;
+        rows.forEach(row => {
+            const show =
+                (!q   || row.dataset.title.includes(q) || row.dataset.ccli.includes(q)) &&
+                (!key || row.dataset.key === key) &&
+                (!tag || row.dataset.tags.split(' ').includes(tag));
+            row.style.display = show ? '' : 'none';
+            if (show) visible++;
+        });
+
+        if (countEl) countEl.textContent = visible + ' song' + (visible !== 1 ? 's' : '');
+        if (noResults) noResults.style.display = visible === 0 ? '' : 'none';
+
+        const hasFilters = !!(q || key || tag);
+        if (resetBtn) {
+            resetBtn.classList.toggle('opacity-30', !hasFilters);
+            resetBtn.classList.toggle('pointer-events-none', !hasFilters);
+        }
+    }
+
+    let debounceTimer;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(filterSongs, 180);
+    });
+
+    if (keySelect) keySelect.addEventListener('change', filterSongs);
+    if (tagSelect) tagSelect.addEventListener('change', filterSongs);
+
+    function setActiveStyle(el, active) {
+        if (active) {
+            el.style.borderColor = 'rgba(20, 121, 114, 0.75)';
+            el.style.boxShadow  = '0 0 0 1px rgba(20, 121, 114, 0.3)';
+        } else {
+            el.style.borderColor = '';
+            el.style.boxShadow   = '';
+        }
+    }
+
+    searchInput.addEventListener('focus', () => setActiveStyle(searchInput, false));
+    searchInput.addEventListener('blur',  () => setActiveStyle(searchInput, !!searchInput.value.trim()));
+    if (keySelect) {
+        keySelect.addEventListener('focus', () => setActiveStyle(keySelect, false));
+        keySelect.addEventListener('blur',  () => setActiveStyle(keySelect, !!keySelect.value));
+    }
+    if (tagSelect) {
+        tagSelect.addEventListener('focus', () => setActiveStyle(tagSelect, false));
+        tagSelect.addEventListener('blur',  () => setActiveStyle(tagSelect, !!tagSelect.value));
+    }
+
+    document.querySelectorAll('[data-tag-filter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (tagSelect) { tagSelect.value = btn.dataset.tagFilter; filterSongs(); }
+        });
+    });
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            if (keySelect) keySelect.value = '';
+            if (tagSelect) tagSelect.value = '';
+            setActiveStyle(searchInput, false);
+            if (keySelect) setActiveStyle(keySelect, false);
+            if (tagSelect) setActiveStyle(tagSelect, false);
+            filterSongs();
+            resetBtn.blur();
+        });
+    }
+
+    filterSongs();
+}());
+
+// Song catalogue: column sorting
+(function () {
+    const sortable = document.querySelectorAll('[data-sort-col]');
+    if (!sortable.length) return;
+
+    const tbody = document.getElementById('song-tbody');
+    let sortCol = 'title';
+    let sortDir = 'asc';
+
+    function getValue(row, col) {
+        switch (col) {
+            case 'title': return [0, row.dataset.title || ''];
+            case 'ccli': {
+                const v = row.dataset.ccli || '';
+                return v ? [0, v.padStart(10, '0')] : [1, ''];
+            }
+            case 'key': {
+                const v = row.dataset.key || '';
+                return v ? [0, v] : [1, ''];
+            }
+            case 'tags': {
+                const v = (row.dataset.tags || '').split(' ')[0] || '';
+                return v ? [0, v] : [1, ''];
+            }
+            default: return [0, ''];
+        }
+    }
+
+    function sortRows() {
+        const rows = Array.from(tbody.querySelectorAll('[data-song-row]'));
+        rows.sort((a, b) => {
+            const [ap, av] = getValue(a, sortCol);
+            const [bp, bv] = getValue(b, sortCol);
+            if (ap !== bp) return ap - bp;
+            const cmp = av.localeCompare(bv, undefined, { numeric: true, sensitivity: 'base' });
+            return sortDir === 'asc' ? cmp : -cmp;
+        });
+        rows.forEach(row => tbody.appendChild(row));
+        updateHeaders();
+    }
+
+    function updateHeaders() {
+        sortable.forEach(th => {
+            const isActive = th.dataset.sortCol === sortCol;
+            const label = th.querySelector('.sort-label');
+            const ascEl = th.querySelector('.sort-asc');
+            const descEl = th.querySelector('.sort-desc');
+
+            if (label) {
+                label.classList.toggle('text-primary', isActive);
+                label.classList.toggle('text-primary-800', !isActive);
+            }
+            if (ascEl && descEl) {
+                ascEl.classList.toggle('opacity-30', !(isActive && sortDir === 'asc'));
+                descEl.classList.toggle('opacity-30', !(isActive && sortDir === 'desc'));
+            }
+        });
+    }
+
+    sortable.forEach(th => {
+        th.addEventListener('click', () => {
+            const col = th.dataset.sortCol;
+            if (col === sortCol) {
+                sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortCol = col;
+                sortDir = 'asc';
+            }
+            sortRows();
+        });
+    });
+
+    sortRows();
+}());
 
 // Admin: confirm before destructive actions
 document.querySelectorAll('[data-confirm]').forEach(btn => {

@@ -33,7 +33,7 @@
                    required class="form-input" placeholder="Song title">
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-3 gap-4">
             <div>
                 <label for="song_key" class="form-label">Key</label>
                 <input type="text" id="song_key" name="song_key"
@@ -45,6 +45,12 @@
                 <input type="number" id="tempo" name="tempo"
                        value="{{ song.tempo ?? '' }}"
                        class="form-input" placeholder="e.g. 72" min="1" max="300">
+            </div>
+            <div>
+                <label for="ccli_number" class="form-label">CCLI Number</label>
+                <input type="text" id="ccli_number" name="ccli_number"
+                       value="{{ song.ccli_number ?? '' }}"
+                       class="form-input" placeholder="e.g. 1234567">
             </div>
         </div>
 

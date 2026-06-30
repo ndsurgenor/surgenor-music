@@ -19,8 +19,8 @@
 <div class="max-w-6xl mx-auto px-6 py-12">
 
     {# SEARCH & FILTERS #}
-    <form method="GET" action="/songs" class="mb-8">
-        <div class="flex flex-col sm:flex-row gap-3">
+    <div class="mb-8">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
 
             {# Search #}
             <div class="flex-1">
@@ -31,9 +31,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <input type="search" id="q" name="q" value="{{ search }}"
-                           placeholder="Search by title or lyrics…"
-                           class="form-input pl-9">
+                    <input type="search" id="q" placeholder="Search by song title and/or CCLI #…" class="form-input pl-9" autocomplete="off">
                 </div>
             </div>
 
@@ -41,10 +39,10 @@
             {% if keys %}
             <div class="sm:w-40">
                 <label for="key" class="sr-only">Filter by key</label>
-                <select id="key" name="key" class="form-input" data-auto-submit>
+                <select id="key" class="form-input">
                     <option value="">All keys</option>
                     {% for k in keys %}
-                    <option value="{{ k }}" {% if filterKey == k %}selected{% endif %}>Key of {{ k }}</option>
+                    <option value="{{ k }}">Key of {{ k }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -54,47 +52,84 @@
             {% if tags %}
             <div class="sm:w-44">
                 <label for="tag" class="sr-only">Filter by tag</label>
-                <select id="tag" name="tag" class="form-input" data-auto-submit>
+                <select id="tag" class="form-input">
                     <option value="">All themes</option>
                     {% for tag in tags %}
-                    <option value="{{ tag.slug }}" {% if filterTag == tag.slug %}selected{% endif %}>{{ tag.name }}</option>
+                    <option value="{{ tag.slug }}">{{ tag.name }}</option>
                     {% endfor %}
                 </select>
             </div>
             {% endif %}
 
-            <button type="submit" class="btn-primary shrink-0">Search</button>
-
-            {% if search or filterKey or filterTag %}
-            <a href="/songs" class="btn-secondary shrink-0">Clear</a>
-            {% endif %}
+            <button type="button" id="song-reset" class="btn py-1.5 sm:py-0 sm:self-stretch shrink-0 border-2 border-accent bg-white hover:bg-accent/15 focus:ring-accent font-normal text-base opacity-30 pointer-events-none transition-all duration-150">
+                <svg class="w-4 h-4 mr-1.5 shrink-0" style="transform:scaleX(-1)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
+                </svg>
+                Reset
+            </button>
         </div>
-    </form>
+    </div>
 
     {# RESULTS #}
     {% if songs %}
     <div class="text-sm text-gray-500 mb-4">
-        {{ songs|length }} song{% if songs|length != 1 %}s{% endif %}
-        {% if search %} matching "<strong class="text-gray-700">{{ search }}</strong>"{% endif %}
+        <span id="song-count">{{ songs|length }} song{% if songs|length != 1 %}s{% endif %}</span>
     </div>
 
     <div class="border border-gray-200 rounded-xl overflow-hidden">
         <table class="w-full text-sm">
             <thead class="bg-primary/10 border-b border-primary/20">
                 <tr>
-                    <th class="text-left px-5 py-3 font-semibold text-primary-800">Title</th>
-                    <th class="text-left px-5 py-3 font-semibold text-primary-800 hidden sm:table-cell">Key</th>
+                    <th class="text-left px-5 py-3 font-semibold cursor-pointer select-none" data-sort-col="title">
+                        <div class="flex items-center gap-1.5">
+                            <span class="sort-label text-primary-800">Title</span>
+                            <span class="flex flex-col gap-0">
+                                <svg class="sort-asc w-3.5 h-3.5 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg>
+                                <svg class="sort-desc w-3.5 h-3.5 opacity-30 -mt-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+                            </span>
+                        </div>
+                    </th>
+                    <th class="text-left px-5 py-3 font-semibold hidden md:table-cell cursor-pointer select-none" data-sort-col="ccli">
+                        <div class="flex items-center gap-1.5">
+                            <span class="sort-label text-primary-800">CCLI#</span>
+                            <span class="flex flex-col gap-0">
+                                <svg class="sort-asc w-3.5 h-3.5 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg>
+                                <svg class="sort-desc w-3.5 h-3.5 opacity-30 -mt-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+                            </span>
+                        </div>
+                    </th>
+                    <th class="text-left px-5 py-3 font-semibold hidden sm:table-cell cursor-pointer select-none" data-sort-col="key">
+                        <div class="flex items-center gap-1.5">
+                            <span class="sort-label text-primary-800">Key</span>
+                            <span class="flex flex-col gap-0">
+                                <svg class="sort-asc w-3.5 h-3.5 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg>
+                                <svg class="sort-desc w-3.5 h-3.5 opacity-30 -mt-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+                            </span>
+                        </div>
+                    </th>
                     <th class="text-left px-5 py-3 font-semibold text-primary-800 hidden md:table-cell">Themes</th>
                     <th class="px-5 py-3"></th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100">
+            <tbody id="song-tbody" class="divide-y divide-gray-100">
                 {% for song in songs %}
-                <tr class="bg-white hover:bg-primary/5 transition-colors">
+                <tr class="bg-white"
+                    data-song-row
+                    data-title="{{ song.title|lower }}"
+                    data-ccli="{{ song.ccli_number ?? '' }}"
+                    data-key="{{ song.song_key }}"
+                    data-tags="{{ song.tags|map(t => t.slug)|join(' ') }}">
                     <td class="px-5 py-4">
                         <a href="/songs/{{ song.slug }}" class="font-medium text-gray-900 hover:text-primary transition-colors">
                             {{ song.title }}
                         </a>
+                    </td>
+                    <td class="px-5 py-4 hidden md:table-cell">
+                        {% if song.ccli_number %}
+                        <span class="text-gray-500">{{ song.ccli_number }}</span>
+                        {% else %}
+                        <span class="text-gray-400">Pending</span>
+                        {% endif %}
                     </td>
                     <td class="px-5 py-4 text-gray-500 hidden sm:table-cell">
                         {% if song.song_key %}{{ song.song_key }}{% else %}—{% endif %}
@@ -102,7 +137,7 @@
                     <td class="px-5 py-4 hidden md:table-cell">
                         <div class="flex flex-wrap gap-1">
                             {% for tag in song.tags %}
-                            <a href="/songs?tag={{ tag.slug }}" class="tag-badge hover:bg-primary/20 transition-colors">{{ tag.name }}</a>
+                            <button type="button" data-tag-filter="{{ tag.slug }}" class="tag-badge hover:bg-primary/20 transition-colors">{{ tag.name }}</button>
                             {% endfor %}
                         </div>
                     </td>
@@ -115,14 +150,22 @@
         </table>
     </div>
 
-    {% else %}
-    {# No songs found #}
-    <div class="text-center py-16 text-gray-500">
+    <div id="song-no-results" class="text-center py-16 text-gray-500" style="display:none">
         <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
         </svg>
         <p class="font-medium text-gray-700 mb-1">No songs found</p>
         <p class="text-sm">Try adjusting your search or filters.</p>
+    </div>
+
+    {% else %}
+    {# Empty catalogue — no songs added yet #}
+    <div class="text-center py-16 text-gray-500">
+        <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+        </svg>
+        <p class="font-medium text-gray-700 mb-1">No songs yet</p>
+        <p class="text-sm">Check back soon.</p>
     </div>
     {% endif %}
 

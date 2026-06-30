@@ -31,6 +31,10 @@
             <span class="text-gray-500">{{ song.tempo }} BPM</span>
             {% endif %}
 
+            {% if song.ccli_number %}
+            <span class="text-gray-500">CCLI #{{ song.ccli_number }}</span>
+            {% endif %}
+
             {% for tag in song.tags %}
             <a href="/songs?tag={{ tag.slug }}" class="tag-badge">{{ tag.name }}</a>
             {% endfor %}
