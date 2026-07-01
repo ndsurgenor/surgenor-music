@@ -20,15 +20,27 @@ abstract class BaseController
             'debug' => ($_ENV['APP_ENV'] ?? 'production') === 'development',
         ]);
 
+        $currentPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+        $navLinks    = [
+            ['path' => '/', 'label' => 'Home'],
+            ['path' => '/songs', 'label' => 'Music', 'page_heading' => 'Song Catalogue'],
+            ['path' => '/media', 'label' => 'Media', 'page_heading' => 'Media'],
+            ['path' => '/contact', 'label' => 'Contact', 'page_heading' => 'Get in Touch'],
+        ];
+
+        $currentNavLink = null;
+        foreach ($navLinks as $item) {
+            if ($item['path'] === $currentPath || ($item['path'] !== '/' && str_starts_with($currentPath, $item['path']))) {
+                $currentNavLink = $item;
+                break;
+            }
+        }
+
         $this->twig->addGlobal('app_url', rtrim($_ENV['APP_URL'] ?? '', '/'));
         $this->twig->addGlobal('current_year', date('Y'));
-        $this->twig->addGlobal('current_path', parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH));
-        $this->twig->addGlobal('nav_links', [
-            ['path' => '/', 'label' => 'Home'],
-            ['path' => '/songs', 'label' => 'Music', 'footer_text' => 'Song Catalogue'],
-            ['path' => '/media', 'label' => 'Media', 'footer_text' => 'Watch & Listen'],
-            ['path' => '/contact', 'label' => 'Contact', 'footer_text' => 'Get in Touch'],
-        ]);
+        $this->twig->addGlobal('current_path', $currentPath);
+        $this->twig->addGlobal('nav_links', $navLinks);
+        $this->twig->addGlobal('page_heading', $currentNavLink['page_heading'] ?? $currentNavLink['label'] ?? null);
 
         if (session_status() === PHP_SESSION_ACTIVE) {
             if (!isset($_SESSION['csrf_token'])) {

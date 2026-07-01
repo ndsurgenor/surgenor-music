@@ -98,9 +98,9 @@
                 {% for item in nav_links %}
                 {% if item.path != '/' %}
                 <div>
-                    <h4 class="font-semibold text-white text-sm mb-3">{{ item.footer_heading|default(item.label) }}</h4>
+                    <h4 class="font-semibold text-white text-sm mb-3">{{ item.label }}</h4>
                     <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="{{ item.path }}" class="hover:text-accent transition-colors">{{ item.footer_text|default(item.label) }}</a></li>
+                        <li><a href="{{ item.path }}" class="hover:text-accent transition-colors">{{ item.page_heading|default(item.label) }}</a></li>
                     </ul>
                 </div>
                 {% endif %}
