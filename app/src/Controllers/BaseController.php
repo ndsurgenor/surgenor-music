@@ -23,6 +23,12 @@ abstract class BaseController
         $this->twig->addGlobal('app_url', rtrim($_ENV['APP_URL'] ?? '', '/'));
         $this->twig->addGlobal('current_year', date('Y'));
         $this->twig->addGlobal('current_path', parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH));
+        $this->twig->addGlobal('nav_links', [
+            ['path' => '/', 'label' => 'Home'],
+            ['path' => '/songs', 'label' => 'Music', 'footer_text' => 'Song Catalogue'],
+            ['path' => '/media', 'label' => 'Media', 'footer_text' => 'Watch & Listen'],
+            ['path' => '/contact', 'label' => 'Contact', 'footer_text' => 'Get in Touch'],
+        ]);
 
         if (session_status() === PHP_SESSION_ACTIVE) {
             if (!isset($_SESSION['csrf_token'])) {

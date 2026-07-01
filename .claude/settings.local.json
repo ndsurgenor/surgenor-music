@@ -3,7 +3,9 @@
     "allow": [
       "Bash(composer install:*)",
       "Bash(php -m)",
-      "Bash(php:*)"
+      "Bash(php:*)",
+      "Bash(curl -s http://127.0.0.1:8099/)",
+      "Bash(kill %1)"
     ]
   }
 }
