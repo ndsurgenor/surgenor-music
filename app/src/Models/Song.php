@@ -16,8 +16,7 @@ class Song
     public static function featured(int $limit = 6): array
     {
         return Database::query(
-            'SELECT * FROM songs WHERE featured = 1 ORDER BY created_at DESC LIMIT ?',
-            [$limit]
+            'SELECT * FROM songs WHERE featured = 1 ORDER BY created_at DESC LIMIT ' . $limit
         )->fetchAll();
     }
 
@@ -149,13 +148,13 @@ class Song
             $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', $name));
 
             Database::query(
-                'INSERT OR IGNORE INTO tags (name, slug) VALUES (?, ?)',
+                'INSERT IGNORE INTO tags (name, slug) VALUES (?, ?)',
                 [$name, $slug]
             );
             $tag = Database::query('SELECT id FROM tags WHERE slug = ?', [$slug])->fetch();
             if ($tag) {
                 Database::query(
-                    'INSERT OR IGNORE INTO song_tags (song_id, tag_id) VALUES (?, ?)',
+                    'INSERT IGNORE INTO song_tags (song_id, tag_id) VALUES (?, ?)',
                     [$songId, $tag['id']]
                 );
             }

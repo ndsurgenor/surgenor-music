@@ -16,12 +16,15 @@ use App\Controllers\ContactController;
 use App\Controllers\MediaController;
 use App\Controllers\AdminController;
 
-// Run database migrations on first boot (creates the SQLite file)
-$dbPath     = dirname(__DIR__) . '/app/database/surgenor.sqlite';
+// Run database migrations on first boot (creates tables if they don't exist yet)
 $schemaPath = dirname(__DIR__) . '/app/database/schema.sql';
+$db         = Database::getInstance();
+$tableExists = $db->query("SHOW TABLES LIKE 'songs'")->fetch();
 
-if (!file_exists($dbPath) && file_exists($schemaPath)) {
-    Database::getInstance()->exec(file_get_contents($schemaPath));
+if (!$tableExists && file_exists($schemaPath)) {
+    foreach (array_filter(array_map('trim', explode(';', file_get_contents($schemaPath)))) as $statement) {
+        $db->exec($statement);
+    }
 }
 
 session_start();

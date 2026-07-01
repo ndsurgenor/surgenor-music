@@ -2,7 +2,6 @@ app/vendor/
 node_modules/
 .env
 public_html/assets/css/app.css
-app/database/*.sqlite
 public_html/uploads/*
 !public_html/uploads/.gitkeep
 public_html/assets/images/hero.jpg

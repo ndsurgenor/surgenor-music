@@ -16,16 +16,21 @@ class Database
     public static function getInstance(): PDO
     {
         if (self::$instance === null) {
-            $dbPath = self::resolvePath($_ENV['DB_PATH'] ?? 'database/surgenor.sqlite');
+            $host    = $_ENV['DB_HOST'] ?? '127.0.0.1';
+            $port    = $_ENV['DB_PORT'] ?? '3306';
+            $name    = $_ENV['DB_NAME'] ?? 'surgenor_music';
+            $user    = $_ENV['DB_USER'] ?? 'root';
+            $pass    = $_ENV['DB_PASS'] ?? '';
+            $charset = $_ENV['DB_CHARSET'] ?? 'utf8mb4';
+
+            $dsn = "mysql:host={$host};port={$port};dbname={$name};charset={$charset}";
 
             try {
-                self::$instance = new PDO('sqlite:' . $dbPath, null, null, [
+                self::$instance = new PDO($dsn, $user, $pass, [
                     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::ATTR_EMULATE_PREPARES   => false,
                 ]);
-                self::$instance->exec('PRAGMA foreign_keys = ON;');
-                self::$instance->exec('PRAGMA journal_mode = WAL;');
             } catch (PDOException $e) {
                 throw new RuntimeException('Database connection failed: ' . $e->getMessage());
             }
@@ -44,15 +49,5 @@ class Database
     public static function lastInsertId(): int
     {
         return (int) self::getInstance()->lastInsertId();
-    }
-
-    private static function resolvePath(string $path): string
-    {
-        // Absolute paths pass through unchanged
-        if (str_starts_with($path, '/') || preg_match('/^[A-Z]:/i', $path)) {
-            return $path;
-        }
-        // Relative paths resolve from the app/ directory
-        return dirname(__DIR__) . '/' . ltrim($path, '/');
     }
 }
