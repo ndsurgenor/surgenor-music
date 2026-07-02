@@ -141,7 +141,7 @@
             Lyrics
         </h2>
         <div class="card">
-            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap leading-relaxed">{{ song.lyrics }}</div>
+            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap leading-relaxed">{{ song.lyrics|raw }}</div>
         </div>
     </section>
     {% endif %}

@@ -75,9 +75,17 @@
         <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Lyrics</h2>
         <div>
             <label for="lyrics" class="form-label">Lyrics</label>
-            <textarea id="lyrics" name="lyrics" rows="12"
-                      class="form-input font-mono text-sm resize-y"
-                      placeholder="Paste lyrics here. Line breaks are preserved.">{{ song.lyrics ?? '' }}</textarea>
+            <div data-rich-toolbar>
+                <div class="flex items-center gap-1 border border-gray-300 rounded-t-lg px-2 py-1.5 bg-gray-50 border-b-0">
+                    <button type="button" data-command="bold"   class="rich-btn px-2 py-1 text-sm rounded hover:bg-gray-200"><strong>B</strong></button>
+                    <button type="button" data-command="italic" class="rich-btn px-2 py-1 text-sm rounded hover:bg-gray-200"><em>I</em></button>
+                    <div class="w-px h-5 bg-gray-300 mx-1"></div>
+                    <button type="button" data-command="removeFormat" class="rich-btn px-2 py-1 text-sm rounded hover:bg-gray-200">✕</button>
+                </div>
+                <div contenteditable="true" data-rich-editor="lyrics"
+                     class="form-input font-mono text-sm resize-y rounded-t-none min-h-[16rem]">{{ (song.lyrics ?? '')|raw }}</div>
+            </div>
+            <input type="hidden" name="lyrics" id="lyrics">
         </div>
     </div>
 
