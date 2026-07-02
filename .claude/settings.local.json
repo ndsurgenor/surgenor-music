@@ -5,7 +5,10 @@
       "Bash(php -m)",
       "Bash(php:*)",
       "Bash(curl -s http://127.0.0.1:8099/)",
-      "Bash(kill %1)"
+      "Bash(kill %1)",
+      "Bash(powershell -Command \"\\(Get-Content base.twig\\) -replace 'text-rose-500/65 hover:text-rose-500/95', 'text-rose-500/70 hover:text-rose-500/100' -replace 'text-green-500/65 hover:text-green-500/95', 'text-green-500/70 hover:text-green-500/100' -replace 'text-red-500/65 hover:text-red-500/95', 'text-red-500/70 hover:text-red-500/100' | Set-Content base.twig\")",
+      "Bash(powershell -Command \"\\(Get-Content 'C:\\\\Code\\\\surgenor-music\\\\app\\\\templates\\\\base.twig'\\) -replace 'text-green-500/70 hover:', 'text-green-500/75 hover:' -replace 'text-red-500/70 hover:', 'text-red-500/75 hover:' | Set-Content 'C:\\\\Code\\\\surgenor-music\\\\app\\\\templates\\\\base.twig'\")",
+      "Bash(git mv *)"
     ]
   }
 }

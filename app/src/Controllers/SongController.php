@@ -31,6 +31,6 @@ class SongController extends BaseController
             return;
         }
 
-        $this->render('songs/show.twig', ['song' => $song]);
+        $this->render('songs/detail.twig', ['song' => $song]);
     }
 }
