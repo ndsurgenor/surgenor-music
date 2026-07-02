@@ -178,6 +178,10 @@ if (flash) {
                 const v = row.dataset.key || '';
                 return v ? [0, v] : [1, ''];
             }
+            case 'tempo': {
+                const v = row.dataset.tempo || '';
+                return v ? [0, v.padStart(10, '0')] : [1, ''];
+            }
             case 'tags': {
                 const v = (row.dataset.tags || '').split(' ')[0] || '';
                 return v ? [0, v] : [1, ''];

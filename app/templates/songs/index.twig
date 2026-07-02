@@ -1,6 +1,6 @@
 {% extends 'base.twig' %}
 
-{% block title %}Song Catalogue | Surgenor Music{% endblock %}
+{% block title %}{{ page_heading }} | Surgenor Music{% endblock %}
 {% block meta_description %}Browse and search worship songs and resources from Nathan Surgenor.{% endblock %}
 
 {% block content %}
@@ -127,6 +127,15 @@
                             </span>
                         </div>
                     </th>
+                    <th class="text-left px-5 py-3 font-semibold hidden sm:table-cell cursor-pointer select-none" data-sort-col="tempo">
+                        <div class="flex items-center gap-1.5">
+                            <span class="sort-label text-primary-800">Tempo</span>
+                            <span class="flex flex-col gap-0">
+                                <svg class="sort-asc w-3.5 h-3.5 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg>
+                                <svg class="sort-desc w-3.5 h-3.5 opacity-30 -mt-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+                            </span>
+                        </div>
+                    </th>
                     <th class="text-left px-5 py-3 font-semibold text-primary-800 hidden md:table-cell">Themes</th>
                     <th class="px-5 py-3"></th>
                 </tr>
@@ -138,6 +147,7 @@
                     data-title="{{ song.title|lower }}"
                     data-ccli="{{ song.ccli_number ?? '' }}"
                     data-key="{{ song.song_key }}"
+                    data-tempo="{{ song.tempo ?? '' }}"
                     data-tags="{{ song.tags|map(t => t.slug)|join(' ') }}">
                     <td class="px-5 py-4">
                         <a href="/songs/{{ song.slug }}" class="font-medium text-gray-900 hover:text-primary transition-colors">
@@ -153,6 +163,9 @@
                     </td>
                     <td class="px-5 py-4 text-gray-500 hidden sm:table-cell">
                         {% if song.song_key %}{{ song.song_key }}{% else %}—{% endif %}
+                    </td>
+                    <td class="px-5 py-4 text-gray-500 hidden sm:table-cell">
+                        {% if song.tempo %}{{ song.tempo }}{% else %}—{% endif %}
                     </td>
                     <td class="px-5 py-4 hidden md:table-cell">
                         <div class="flex flex-wrap gap-1">

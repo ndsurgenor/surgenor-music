@@ -110,11 +110,9 @@
             {% for file in sm_files %}
             <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg border border-gray-200 text-sm">
                 <span class="text-gray-700">{{ file.label }} <span class="text-gray-400">({{ file.filename }})</span></span>
-                <form method="POST" action="/admin/files/{{ file.id }}/delete" class="inline">
-                    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
-                    <button type="submit" class="text-red-500 hover:text-red-700 text-xs font-medium"
-                            data-confirm="Remove this file?">Remove</button>
-                </form>
+                <button type="submit" formaction="/admin/files/{{ file.id }}/delete" formmethod="POST"
+                        formnovalidate class="text-red-500 hover:text-red-700 text-xs font-medium"
+                        data-confirm="Remove this file?">Remove</button>
             </div>
             {% endfor %}
         </div>
@@ -141,11 +139,9 @@
             {% for file in audio_files %}
             <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg border border-gray-200 text-sm">
                 <span class="text-gray-700">{{ file.label }} <span class="text-gray-400">({{ file.filename }})</span></span>
-                <form method="POST" action="/admin/files/{{ file.id }}/delete" class="inline">
-                    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
-                    <button type="submit" class="text-red-500 hover:text-red-700 text-xs font-medium"
-                            data-confirm="Remove this file?">Remove</button>
-                </form>
+                <button type="submit" formaction="/admin/files/{{ file.id }}/delete" formmethod="POST"
+                        formnovalidate class="text-red-500 hover:text-red-700 text-xs font-medium"
+                        data-confirm="Remove this file?">Remove</button>
             </div>
             {% endfor %}
         </div>

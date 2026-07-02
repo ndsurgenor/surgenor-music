@@ -24,7 +24,7 @@ abstract class BaseController
         $navLinks    = [
             ['path' => '/', 'label' => 'Home'],
             ['path' => '/songs', 'label' => 'Music', 'page_heading' => 'Song Catalogue'],
-            ['path' => '/media', 'label' => 'Media', 'page_heading' => 'Media'],
+            ['path' => '/media', 'label' => 'Media', 'page_heading' => 'Watch & Listen'],
             ['path' => '/contact', 'label' => 'Contact', 'page_heading' => 'Get in Touch'],
         ];
 
@@ -70,6 +70,11 @@ abstract class BaseController
 
     protected function validateCsrf(): void
     {
+        if (empty($_POST) && empty($_FILES) && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
+            http_response_code(413);
+            exit('Upload too large: the selected files exceed the server\'s upload limit. Try uploading fewer or smaller files at once.');
+        }
+
         $token = $_POST['_csrf'] ?? '';
         if (!hash_equals($_SESSION['csrf_token'] ?? '', $token)) {
             http_response_code(403);

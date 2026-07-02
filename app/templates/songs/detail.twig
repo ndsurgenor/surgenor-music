@@ -1,6 +1,6 @@
 {% extends 'base.twig' %}
 
-{% block title %}{{ song.title }} — Surgenor Music{% endblock %}
+{% block title %}{{ song.title }} | Surgenor Music{% endblock %}
 {% block meta_description %}Sheet music, audio, and lyrics for "{{ song.title }}" by Nathan Surgenor.{% endblock %}
 
 {% block content %}
@@ -56,18 +56,40 @@
     {# SHEET MUSIC #}
     {% if sheet_music_files|length %}
     <section class="mb-12">
-        <h2 class="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
-            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-            Sheet Music
-        </h2>
+        <div class="flex items-center justify-between mb-5">
+            <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Sheet Music
+            </h2>
+            {% if sheet_music_files|length == 1 %}
+            <a href="/uploads/songs/{{ song.id }}/{{ sheet_music_files[0].filename }}"
+               download
+               class="btn-secondary text-xs px-3 py-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Download
+            </a>
+            {% endif %}
+        </div>
 
         <div class="space-y-6">
             {% for file in sheet_music_files %}
             <div class="card">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-semibold text-gray-900">{{ file.label }}</h3>
+                <div class="rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
+                    <iframe src="/uploads/songs/{{ song.id }}/{{ file.filename }}#toolbar=0"
+                            class="w-full h-[680px]"
+                            title="{{ file.label }}">
+                        <p class="p-4 text-sm text-gray-600">
+                            Your browser cannot display this PDF.
+                            <a href="/uploads/songs/{{ song.id }}/{{ file.filename }}" class="text-primary underline">Download it instead.</a>
+                        </p>
+                    </iframe>
+                </div>
+                {% if sheet_music_files|length > 1 %}
+                <div class="flex items-center justify-end mt-4">
                     <a href="/uploads/songs/{{ song.id }}/{{ file.filename }}"
                        download
                        class="btn-secondary text-xs px-3 py-1.5 flex items-center gap-1.5">
@@ -77,16 +99,7 @@
                         Download
                     </a>
                 </div>
-                <div class="rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
-                    <iframe src="/uploads/songs/{{ song.id }}/{{ file.filename }}"
-                            class="w-full h-[680px]"
-                            title="{{ file.label }}">
-                        <p class="p-4 text-sm text-gray-600">
-                            Your browser cannot display this PDF.
-                            <a href="/uploads/songs/{{ song.id }}/{{ file.filename }}" class="text-primary underline">Download it instead.</a>
-                        </p>
-                    </iframe>
-                </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
