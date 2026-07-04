@@ -79,4 +79,12 @@
         @apply bg-white border border-gray-200 rounded-xl p-6;
     }
 
+    .view-tab-btn {
+        @apply inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors;
+    }
+
+    .view-tab-btn.active {
+        @apply bg-primary text-white shadow-sm hover:text-white;
+    }
+
 }

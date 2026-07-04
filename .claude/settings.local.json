@@ -8,7 +8,25 @@
       "Bash(kill %1)",
       "Bash(powershell -Command \"\\(Get-Content base.twig\\) -replace 'text-rose-500/65 hover:text-rose-500/95', 'text-rose-500/70 hover:text-rose-500/100' -replace 'text-green-500/65 hover:text-green-500/95', 'text-green-500/70 hover:text-green-500/100' -replace 'text-red-500/65 hover:text-red-500/95', 'text-red-500/70 hover:text-red-500/100' | Set-Content base.twig\")",
       "Bash(powershell -Command \"\\(Get-Content 'C:\\\\Code\\\\surgenor-music\\\\app\\\\templates\\\\base.twig'\\) -replace 'text-green-500/70 hover:', 'text-green-500/75 hover:' -replace 'text-red-500/70 hover:', 'text-red-500/75 hover:' | Set-Content 'C:\\\\Code\\\\surgenor-music\\\\app\\\\templates\\\\base.twig'\")",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://surgenormusic.test:8000/songs)",
+      "Bash(curl *)",
+      "Bash(node -e \"console.log\\('ok'\\)\")",
+      "Skill(run)",
+      "Bash(chromium-cli *)",
+      "Bash(npm ls *)",
+      "Bash(pkill -f \"npm run php\")",
+      "Bash(pkill -f \"php -d upload_max_filesize\")",
+      "Bash(npm install *)",
+      "Bash(npx playwright *)",
+      "Bash(disown)",
+      "Bash(timeout 20 bash -c 'until curl -sf http://surgenormusic.test:8000/songs >/dev/null; do sleep 1; done')",
+      "Bash(node \"C:/Users/ndsur/AppData/Local/Temp/claude/C--Code-surgenor-music/5f2e9907-a133-46eb-8fc6-7ac556daec5e/scratchpad/test-tabs.js\")",
+      "Bash(node scratch-test-tabs.js)",
+      "Bash(rm -f scratch-test-tabs.js)",
+      "Bash(node scratch-test-tabs2.js)",
+      "Bash(rm -f scratch-test-tabs2.js)"
     ]
   }
 }
