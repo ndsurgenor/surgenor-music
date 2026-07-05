@@ -258,50 +258,52 @@ document.querySelectorAll('[data-view-switcher]').forEach(switcher => {
     });
 });
 
-// Admin: CCLI SongSelect URL — live number preview + manual override toggle
+// Admin: CCLI SongSelect URL — auto-fills the CCLI Number field (disabled) from the
+// URL, with an Auto/Manual switch to enter an override instead.
 (function () {
     const field = document.querySelector('[data-ccli-field]');
     if (!field) return;
 
-    const urlInput      = field.querySelector('[data-ccli-url-input]');
-    const previewWrap   = field.querySelector('[data-ccli-preview]');
-    const previewNumber = field.querySelector('[data-ccli-preview-number]');
-    const incorrectBtn  = field.querySelector('[data-ccli-incorrect-toggle]');
-    const manualWrap     = field.querySelector('[data-ccli-manual-wrap]');
-    const manualInput    = field.querySelector('#ccli_number_override');
-    const manualCancel   = field.querySelector('[data-ccli-manual-cancel]');
+    const urlInput    = field.querySelector('[data-ccli-url-input]');
+    const numberWrap  = field.querySelector('[data-ccli-number-wrap]');
+    const numberInput = field.querySelector('[data-ccli-number-input]');
+    const switchBtn   = field.querySelector('[data-ccli-switch]');
+    const autoLabel   = field.querySelector('[data-ccli-mode-label="auto"]');
+    const manualLabel = field.querySelector('[data-ccli-mode-label="manual"]');
 
     function extractNumber(url) {
         const match = url.match(/\/songs\/(\d+)/);
         return match ? match[1] : null;
     }
 
-    function updatePreview() {
-        if (!manualWrap.classList.contains('hidden')) {
-            previewWrap.classList.add('hidden');
-            return;
-        }
+    function updateFromUrl() {
+        if (!numberInput.disabled) return;
         const number = extractNumber(urlInput.value.trim());
-        if (number) {
-            previewNumber.textContent = number;
-            previewWrap.classList.remove('hidden');
+        numberInput.value = number || '';
+        numberWrap.classList.toggle('hidden', !number);
+    }
+
+    function setManual(manual) {
+        switchBtn.setAttribute('aria-checked', String(!manual));
+        switchBtn.classList.toggle('active', !manual);
+        autoLabel.classList.toggle('text-gray-700', !manual);
+        autoLabel.classList.toggle('text-gray-400', manual);
+        manualLabel.classList.toggle('text-gray-700', manual);
+        manualLabel.classList.toggle('text-gray-400', !manual);
+        numberInput.disabled = !manual;
+        numberWrap.classList.remove('hidden');
+        if (manual) {
+            numberInput.focus();
+            numberInput.select();
         } else {
-            previewWrap.classList.add('hidden');
+            updateFromUrl();
         }
     }
 
-    urlInput.addEventListener('input', updatePreview);
+    urlInput.addEventListener('input', updateFromUrl);
 
-    incorrectBtn.addEventListener('click', () => {
-        manualWrap.classList.remove('hidden');
-        previewWrap.classList.add('hidden');
-        manualInput.focus();
-    });
-
-    manualCancel.addEventListener('click', () => {
-        manualWrap.classList.add('hidden');
-        manualInput.value = '';
-        updatePreview();
+    switchBtn.addEventListener('click', () => {
+        setManual(switchBtn.getAttribute('aria-checked') === 'true');
     });
 }());
 
