@@ -80,11 +80,21 @@
         </div>
 
         <div>
-            <label for="tags" class="form-label">Themes / Tags</label>
+            <label for="tags" class="form-label">Themes</label>
             <input type="text" id="tags" name="tags"
                    value="{{ song.tags is defined ? song.tags|map(t => t.name)|join(', ') : '' }}"
                    class="form-input" placeholder="Comma-separated, e.g. Praise, Communion, Advent">
-            <p class="mt-1 text-xs text-gray-500">Separate multiple tags with commas. New tags are created automatically.</p>
+            <p class="mt-1 text-xs text-gray-500">Separate multiple themes with commas. New theme tags are created automatically.</p>
+
+            {% if tags %}
+            {% set current_tag_names = song.tags is defined ? song.tags|map(t => t.name|lower) : [] %}
+            <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mt-3 mb-1.5">Existing themes</p>
+            <div class="flex flex-wrap gap-1.5">
+                {% for tag in tags %}
+                <button type="button" data-tag-add="{{ tag.name }}" class="tag-badge hover:bg-primary/20 transition-colors{% if tag.name|lower in current_tag_names %} tag-badge-selected{% endif %}">{{ tag.name }}</button>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
 
         <div class="flex items-center gap-3">
@@ -99,7 +109,6 @@
     <div class="card space-y-4">
         <h2 class="font-semibold text-gray-900 text-base border-b border-gray-100 pb-3">Lyrics</h2>
         <div>
-            <label for="lyrics" class="form-label">Lyrics</label>
             <div data-rich-toolbar>
                 <div class="flex items-center gap-1 border border-gray-300 rounded-t-lg px-2 py-1.5 bg-gray-50 border-b-0">
                     <button type="button" data-command="bold"   class="rich-btn px-2 py-1 text-sm rounded hover:bg-gray-200"><strong>B</strong></button>

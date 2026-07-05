@@ -59,7 +59,6 @@
     {% set audio_files = song.files|filter(f => f.type == 'audio') %}
     {% set has_sheet_music = sheet_music_files|length > 0 %}
     {% set has_lyrics = song.lyrics is not empty %}
-    {% set has_view_switcher = has_sheet_music and has_lyrics %}
 
     {# VIEW SWITCHER #}
     {% if has_sheet_music and has_lyrics %}
@@ -70,9 +69,6 @@
                     class="view-tab-btn active"
                     role="tab"
                     aria-selected="true">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
                 Sheet Music
             </button>
             <button type="button"
@@ -80,9 +76,6 @@
                     class="view-tab-btn"
                     role="tab"
                     aria-selected="false">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10"/>
-                </svg>
                 Lyrics
             </button>
         </div>
@@ -92,16 +85,13 @@
     {# SHEET MUSIC #}
     {% if has_sheet_music %}
     <section class="mb-12" data-view-panel="sheet-music">
-        {% if not has_view_switcher or sheet_music_files|length == 1 %}
-        <div class="flex items-center {% if has_view_switcher %}justify-end{% else %}justify-between{% endif %} mb-5">
-            {% if not has_view_switcher %}
+        <div class="flex items-center justify-between mb-5">
             <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                 </svg>
                 Sheet Music
             </h2>
-            {% endif %}
             {% if sheet_music_files|length == 1 %}
             <a href="/uploads/songs/{{ song.id }}/{{ sheet_music_files[0].filename }}"
                download
@@ -113,7 +103,6 @@
             </a>
             {% endif %}
         </div>
-        {% endif %}
 
         <div class="space-y-6">
             {% for file in sheet_music_files %}
@@ -174,14 +163,12 @@
     {# LYRICS #}
     {% if has_lyrics %}
     <section class="mb-12{% if has_sheet_music %} hidden{% endif %}" data-view-panel="lyrics">
-        {% if not has_view_switcher %}
         <h2 class="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
             <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10"/>
             </svg>
             Lyrics
         </h2>
-        {% endif %}
         <div class="card">
             <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap leading-relaxed">{{ song.lyrics|raw }}</div>
         </div>
