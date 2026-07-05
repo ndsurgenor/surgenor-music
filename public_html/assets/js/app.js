@@ -258,6 +258,53 @@ document.querySelectorAll('[data-view-switcher]').forEach(switcher => {
     });
 });
 
+// Admin: CCLI SongSelect URL — live number preview + manual override toggle
+(function () {
+    const field = document.querySelector('[data-ccli-field]');
+    if (!field) return;
+
+    const urlInput      = field.querySelector('[data-ccli-url-input]');
+    const previewWrap   = field.querySelector('[data-ccli-preview]');
+    const previewNumber = field.querySelector('[data-ccli-preview-number]');
+    const incorrectBtn  = field.querySelector('[data-ccli-incorrect-toggle]');
+    const manualWrap     = field.querySelector('[data-ccli-manual-wrap]');
+    const manualInput    = field.querySelector('#ccli_number_override');
+    const manualCancel   = field.querySelector('[data-ccli-manual-cancel]');
+
+    function extractNumber(url) {
+        const match = url.match(/\/songs\/(\d+)/);
+        return match ? match[1] : null;
+    }
+
+    function updatePreview() {
+        if (!manualWrap.classList.contains('hidden')) {
+            previewWrap.classList.add('hidden');
+            return;
+        }
+        const number = extractNumber(urlInput.value.trim());
+        if (number) {
+            previewNumber.textContent = number;
+            previewWrap.classList.remove('hidden');
+        } else {
+            previewWrap.classList.add('hidden');
+        }
+    }
+
+    urlInput.addEventListener('input', updatePreview);
+
+    incorrectBtn.addEventListener('click', () => {
+        manualWrap.classList.remove('hidden');
+        previewWrap.classList.add('hidden');
+        manualInput.focus();
+    });
+
+    manualCancel.addEventListener('click', () => {
+        manualWrap.classList.add('hidden');
+        manualInput.value = '';
+        updatePreview();
+    });
+}());
+
 // Admin: confirm before destructive actions
 document.querySelectorAll('[data-confirm]').forEach(btn => {
     btn.addEventListener('click', e => {

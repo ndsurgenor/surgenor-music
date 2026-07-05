@@ -26,7 +26,14 @@
       "Bash(node scratch-test-tabs.js)",
       "Bash(rm -f scratch-test-tabs.js)",
       "Bash(node scratch-test-tabs2.js)",
-      "Bash(rm -f scratch-test-tabs2.js)"
+      "Bash(rm -f scratch-test-tabs2.js)",
+      "Bash(mysql *)",
+      "Bash(where mysql *)",
+      "Bash(where php *)",
+      "Bash(node)",
+      "Bash(pkill -f \"php -S surgenormusic.test:8000\")",
+      "Bash(npx tailwindcss *)",
+      "Bash(node --check \"C:/Code/surgenor-music/public_html/assets/js/app.js\")"
     ]
   }
 }

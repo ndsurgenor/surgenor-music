@@ -170,14 +170,15 @@ class AdminController extends BaseController
     {
         $title = trim($_POST['title'] ?? '');
         $data  = [
-            'title'          => $title,
-            'song_key'       => trim($_POST['song_key'] ?? ''),
-            'tempo'          => (int) ($_POST['tempo'] ?? 0) ?: null,
-            'ccli_number'    => trim($_POST['ccli_number'] ?? '') ?: null,
-            'lyrics'         => $this->normalisHeroText(trim($_POST['lyrics'] ?? '')),
-            'copyright_info' => trim($_POST['copyright_info'] ?? ''),
-            'notes'          => trim($_POST['notes'] ?? ''),
-            'featured'       => isset($_POST['featured']) ? 1 : 0,
+            'title'                 => $title,
+            'song_key'              => trim($_POST['song_key'] ?? ''),
+            'tempo'                 => (int) ($_POST['tempo'] ?? 0) ?: null,
+            'ccli_url'              => trim($_POST['ccli_url'] ?? '') ?: null,
+            'ccli_number_override'  => trim($_POST['ccli_number_override'] ?? '') ?: null,
+            'lyrics'                => $this->normalisHeroText(trim($_POST['lyrics'] ?? '')),
+            'copyright_info'        => trim($_POST['copyright_info'] ?? ''),
+            'notes'                 => trim($_POST['notes'] ?? ''),
+            'featured'              => isset($_POST['featured']) ? 1 : 0,
         ];
 
         if ($includeSlug) {

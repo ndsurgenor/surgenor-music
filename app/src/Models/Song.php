@@ -72,10 +72,24 @@ class Song
         $songs = Database::query($sql, $params)->fetchAll();
 
         foreach ($songs as &$song) {
-            $song['tags'] = self::getTagsForSong($song['id']);
+            $song['tags']        = self::getTagsForSong($song['id']);
+            $song['ccli_number'] = self::ccliNumber($song);
         }
 
         return $songs;
+    }
+
+    public static function ccliNumberFromUrl(?string $url): ?string
+    {
+        if ($url && preg_match('#/songs/(\d+)#', $url, $matches)) {
+            return $matches[1];
+        }
+        return null;
+    }
+
+    public static function ccliNumber(array $song): ?string
+    {
+        return $song['ccli_number_override'] ?: self::ccliNumberFromUrl($song['ccli_url'] ?? null);
     }
 
     public static function allKeys(): array
@@ -102,8 +116,8 @@ class Song
     public static function create(array $data): int
     {
         Database::query(
-            'INSERT INTO songs (title, slug, song_key, tempo, ccli_number, lyrics, copyright_info, notes, featured)
-             VALUES (:title, :slug, :song_key, :tempo, :ccli_number, :lyrics, :copyright_info, :notes, :featured)',
+            'INSERT INTO songs (title, slug, song_key, tempo, ccli_url, ccli_number_override, lyrics, copyright_info, notes, featured)
+             VALUES (:title, :slug, :song_key, :tempo, :ccli_url, :ccli_number_override, :lyrics, :copyright_info, :notes, :featured)',
             $data
         );
         return Database::lastInsertId();
@@ -116,8 +130,8 @@ class Song
 
         Database::query(
             'UPDATE songs
-             SET title=:title, song_key=:song_key, tempo=:tempo, ccli_number=:ccli_number, lyrics=:lyrics,
-                 copyright_info=:copyright_info, notes=:notes, featured=:featured, updated_at=:updated_at
+             SET title=:title, song_key=:song_key, tempo=:tempo, ccli_url=:ccli_url, ccli_number_override=:ccli_number_override,
+                 lyrics=:lyrics, copyright_info=:copyright_info, notes=:notes, featured=:featured, updated_at=:updated_at
              WHERE id=:id',
             $data
         );
@@ -187,8 +201,9 @@ class Song
 
     private static function hydrate(array $song): array
     {
-        $song['tags']  = self::getTagsForSong($song['id']);
-        $song['files'] = self::getFilesForSong($song['id']);
+        $song['tags']        = self::getTagsForSong($song['id']);
+        $song['files']       = self::getFilesForSong($song['id']);
+        $song['ccli_number'] = self::ccliNumber($song);
         return $song;
     }
 
