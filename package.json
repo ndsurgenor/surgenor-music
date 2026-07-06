@@ -2,11 +2,14 @@
     "name": "surgenor-music",
     "version": "1.0.0",
     "scripts": {
-        "dev": "tailwindcss -i ./resources/css/app.css -o ./public_html/assets/css/app.css --watch",
-        "build": "tailwindcss -i ./resources/css/app.css -o ./public_html/assets/css/app.css --minify",
+        "dev:css": "tailwindcss -i ./resources/css/app.css -o ./public_html/assets/css/app.css --watch",
+        "dev:js": "node scripts/watch-js.js",
+        "build:css": "tailwindcss -i ./resources/css/app.css -o ./public_html/assets/css/app.css --minify",
+        "build:js": "node scripts/build-js.js",
+        "build": "npm run build:css && npm run build:js",
         "php": "php -d upload_max_filesize=20M -d post_max_size=25M -d max_file_uploads=20 -S surgenormusic.test:8000 -t public_html",
-        "start": "concurrently --names \"php,css\" --prefix-colors \"cyan,yellow\" \"npm run php\" \"npm run dev\"",
-        "view": "concurrently --names \"php,css,browser\" --prefix-colors \"cyan,yellow,green\" \"npm run php\" \"npm run dev\" \"node scripts/open-browser.js\""
+        "start": "concurrently --names \"php,css,js\" --prefix-colors \"cyan,yellow,magenta\" \"npm run php\" \"npm run dev:css\" \"npm run dev:js\"",
+        "view": "concurrently --names \"php,css,js,browser\" --prefix-colors \"cyan,yellow,magenta,green\" \"npm run php\" \"npm run dev:css\" \"npm run dev:js\" \"node scripts/open-browser.js\""
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.0",

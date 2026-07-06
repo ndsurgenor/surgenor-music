@@ -33,7 +33,11 @@
       "Bash(node)",
       "Bash(pkill -f \"php -S surgenormusic.test:8000\")",
       "Bash(npx tailwindcss *)",
-      "Bash(node --check \"C:/Code/surgenor-music/public_html/assets/js/app.js\")"
+      "Bash(node --check \"C:/Code/surgenor-music/public_html/assets/js/app.js\")",
+      "Bash(git -C \"C:/Code/surgenor-music\" ls-files public_html/assets/css public_html/assets/js)",
+      "Bash(node scripts/build-js.js)",
+      "Bash(git rm *)",
+      "Bash(echo \"tracked-css-exit:$?\")"
     ]
   }
 }
